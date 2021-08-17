@@ -5,7 +5,7 @@ import pygame
 from personagem import Personagem
 from cenario import Cenario
 from pygame.locals import *
-
+from cano import Cano
 
 pygame.init() 
 
@@ -13,7 +13,8 @@ cenario = Cenario()
 clock = pygame.time.Clock()
 fps = 60
 
-passaro = Personagem(x=350, y=300)
+cano = Cano()
+passaro = Personagem(x=160, y=300)
 
 rodando = True
 while rodando:
@@ -22,6 +23,8 @@ while rodando:
     cenario.tela.fill((0, 0, 150))
     passaro.desenha_personagem(cenario.tela)
     passaro.mover()
+    cano.geraCano(cenario.tela)
+    cano.move()
 
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
