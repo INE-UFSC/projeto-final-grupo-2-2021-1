@@ -1,5 +1,5 @@
-# Aqui a gente vai coonstruir a classe do nosso personagem
-# A ideia posteriormente é especializar essa classe, tendo varios personagens com caracterśticas diferentes
+# Aqui a gente vai construir a classe do nosso personagem
+# A ideia posteriormente é especializar essa classe, tendo vários personagens com características diferentes
 
 import pygame
 
@@ -29,27 +29,31 @@ class Personagem:
         pygame.draw.rect(tela, (255, 0, 0), pygame.Rect(self.__x, self.__y, 35, 35))
 
     def mover(self):
-        # gravidade
+        # confere se o personagem está voando para aplicar a gravidade sobre ele
         if self.voando:
-            self.velocidade += 0.5
-            if self.velocidade > 8:
+            self.velocidade += 0.5   # medida que o personagem desce a cada loop
+            if self.velocidade > 8:   # evita que o personagem caia muito rapidamente
                 self.velocidade = 8
-            if self.__y < 600:
+            if self.__y < 600:  # se o personagem não estiver no chão, atualiza sua posição
                 self.__y += int(self.velocidade)
 
-        # pulo
-        teclas = pygame.key.get_pressed()  # verifica quais teclas foram pressionadas
-        if teclas[pygame.K_UP] and self.__tecla_pressionada == False:
-            self.__tecla_pressionada = True
-            self.velocidade = -10
-        
-        if not teclas[pygame.K_UP]:
-            self.__tecla_pressionada = False
+        # controle do pulo do personagem
+        if not self.game_over:
+            teclas = pygame.key.get_pressed()  # verifica quais teclas foram pressionadas
+            if teclas[pygame.K_UP] and self.__tecla_pressionada == False:
+                self.__tecla_pressionada = True
+                self.velocidade = -10
+            
+            if not teclas[pygame.K_UP]:
+                self.__tecla_pressionada = False
         
         self.morreu()
     
     def morreu(self):
-        # checar se passaro caiu
+        # checa se o personagem atingiu o chão
         if self.__y > 600:
             self.game_over = True
             self.voando = False
+        # checa se o personagem saiu da tela
+        elif self.__y <= 0:
+            self.game_over = True
