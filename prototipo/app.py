@@ -6,7 +6,7 @@ from personagem import Personagem
 from cano import Cano
 from cenario import Cenario
 from pygame.locals import *
-
+from cano import Cano
 
 pygame.init() 
 
@@ -14,11 +14,13 @@ cenario = Cenario()
 clock = pygame.time.Clock()
 fps = 60
 
-passaro = Personagem(x=150, y=300)
+cano1 = Cano(640)
+cano2 = Cano(640)
+cano3 = Cano(640)
 
-canos = Cano(pygame.image.load('projeto-final-grupo-2-2021-1-main/prototipo/teste.png'))
-spawncano = pygame.USEREVENT
-pygame.time.set_timer(spawncano, 2000)
+passaro = Personagem(x=160, y=300)
+
+listaCano = [cano1]
 
 rodando = True
 while rodando:
@@ -27,6 +29,32 @@ while rodando:
     cenario.tela.fill((0, 0, 150))
     passaro.desenha_personagem(cenario.tela)
     passaro.mover()
+    
+    for parte in listaCano:
+        parte.geraCano(cenario.tela)
+        parte.move()
+
+    if cano1.x == 320:
+        cano2 = Cano(640)
+        listaCano.append(cano2)
+    if cano1.x < -40:
+        cano1.destruir()
+        listaCano.remove(cano1)
+    
+    if cano2.x == 320:
+        cano3 = Cano(640)
+        listaCano.append(cano3)
+    if cano2.x < -40:
+        cano2.destruir()
+        listaCano.remove(cano2)
+
+    if cano3.x == 320:
+        cano1 = Cano(640)
+        listaCano.append(cano1)
+    if cano3.x < -40:
+        cano3.destruir()
+        listaCano.remove(cano3)
+
 
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
