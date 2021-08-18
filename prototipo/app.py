@@ -6,6 +6,7 @@ from personagem import Personagem
 from cenario import Cenario
 from pygame.locals import *
 from cano import Cano
+from itens import Itens
 
 pygame.init() 
 
@@ -13,13 +14,15 @@ cenario = Cenario()
 clock = pygame.time.Clock()
 fps = 60
 
+item = Itens(780, 640, cenario.tela, 320)
+
 cano1 = Cano(780, 640, cenario.tela)
 cano2 = Cano(780, 640, cenario.tela)
 cano3 = Cano(780, 640, cenario.tela)
 
 passaro = Personagem(x=160, y=300)
 
-listaCano = [cano1]
+listaObjetos = [cano1]
 
 rodando = True
 while rodando:
@@ -27,31 +30,37 @@ while rodando:
     clock.tick(fps)
     cenario.tela.fill((0, 0, 150))
     
-    for parte in listaCano:
-        parte.geraCano()
+    for parte in listaObjetos:
+        parte.desenha_objeto()
         if not passaro.game_over:  # caso ocorra um "game over" os canos param de mover
             parte.move()
 
     if cano1.x == 320:
-        cano2.tamanhoCano()
-        listaCano.append(cano2)
+        item.posicao_tela()
+        cano2.tamanho_cano()
+        listaObjetos.append(item)
+        listaObjetos.append(cano2)
     if cano1.x < -40:
         cano1.destruir()
-        listaCano.remove(cano1)
+        listaObjetos.remove(cano1)
     
     if cano2.x == 320:
-        cano3.tamanhoCano()
-        listaCano.append(cano3)
+        cano3.tamanho_cano()
+        listaObjetos.append(cano3)
     if cano2.x < -40:
         cano2.destruir()
-        listaCano.remove(cano2)
+        listaObjetos.remove(cano2)
 
     if cano3.x == 320:
-        cano1.tamanhoCano()
-        listaCano.append(cano1)
+        cano1.tamanho_cano()
+        listaObjetos.append(cano1)
     if cano3.x < -40:
         cano3.destruir()
-        listaCano.remove(cano3)
+        listaObjetos.remove(cano3)
+
+    if item.x < -40:
+        item.destruir()
+        listaObjetos.remove(item)
     
     passaro.desenha_personagem(cenario.tela)
     passaro.mover()

@@ -15,15 +15,15 @@ class Cano:
         self.__y2 = 0
         self.base_superior = 0 
         self.base_inferior = 0
-        self.__largura = 35
+        self.__largura = 40
 
-        self.tamanhoCano()
+        self.tamanho_cano()
 
     @property
     def x(self):
         return self.__x
 
-    def tamanhoCano(self): #Altera o tamnho do cano
+    def tamanho_cano(self): #Altera o tamnho do cano
 
         referenciaPadrao = self.altura_tela/8
         base_superior_cano = random.randint(int(referenciaPadrao), int(referenciaPadrao*5))
@@ -36,7 +36,7 @@ class Cano:
         retangulo2 = pygame.Rect(self.__x, self.__y2, self.__largura, self.base_inferior)
         return [retangulo1, retangulo2]
    
-    def geraCano(self): #Desenha o cano na tela do jogo
+    def desenha_objeto(self): #Desenha o cano na tela do jogo
         retangulos = self.gera_retangulo()
 
         self.__y2 = self.bases[1]  
