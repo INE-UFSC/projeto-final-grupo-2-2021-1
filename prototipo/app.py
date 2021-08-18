@@ -62,9 +62,7 @@ while rodando:
         if evento.type == pygame.KEYDOWN and not passaro.voando and not passaro.game_over:
             if evento.key == pygame.K_UP:
                 passaro.voando = True
-        if evento.type == spawncano:
-            canos.lista_canos.append(canos.criar_cano())
-            print(canos.lista_canos)
+
     pygame.display.update()
 
 pygame.quit()
