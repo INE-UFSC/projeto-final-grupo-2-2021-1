@@ -29,9 +29,9 @@ class Cano:
 
     def tamanhoCano(self, altura_tela):
 
-        referenciaPadrao = altura_tela/6
-        base_superior_cano = random.randint(int(referenciaPadrao), int(referenciaPadrao*4))
-        base_inferior_cano = base_superior_cano + int(referenciaPadrao)
+        referenciaPadrao = altura_tela/8
+        base_superior_cano = random.randint(int(referenciaPadrao), int(referenciaPadrao*6))
+        base_inferior_cano = base_superior_cano + 2*int(referenciaPadrao)
         
         bases = [base_superior_cano, base_inferior_cano]
 

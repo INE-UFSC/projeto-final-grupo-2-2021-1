@@ -13,9 +13,9 @@ cenario = Cenario()
 clock = pygame.time.Clock()
 fps = 60
 
-cano1 = Cano(780)
-cano2 = Cano(780)
-cano3 = Cano(780)
+cano1 = Cano(640)
+cano2 = Cano(640)
+cano3 = Cano(640)
 
 passaro = Personagem(x=160, y=300)
 
@@ -34,21 +34,21 @@ while rodando:
         parte.move()
 
     if cano1.x == 320:
-        cano2 = Cano(780)
+        cano2 = Cano(640)
         listaCano.append(cano2)
     if cano1.x < -40:
         cano1.destruir()
         listaCano.remove(cano1)
     
     if cano2.x == 320:
-        cano3 = Cano(780)
+        cano3 = Cano(640)
         listaCano.append(cano3)
     if cano2.x < -40:
         cano2.destruir()
         listaCano.remove(cano2)
 
     if cano3.x == 320:
-        cano1 = Cano(780)
+        cano1 = Cano(640)
         listaCano.append(cano1)
     if cano3.x < -40:
         cano3.destruir()
