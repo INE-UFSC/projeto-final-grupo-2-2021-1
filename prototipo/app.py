@@ -26,12 +26,11 @@ while rodando:
 
     clock.tick(fps)
     cenario.tela.fill((0, 0, 150))
-    passaro.desenha_personagem(cenario.tela)
-    passaro.mover()
     
     for parte in listaCano:
         parte.geraCano()
-        parte.move()
+        if not passaro.game_over:  # caso ocorra um "game over" os canos param de mover
+            parte.move()
 
     if cano1.x == 320:
         cano2.tamanhoCano()
@@ -53,6 +52,9 @@ while rodando:
     if cano3.x < -40:
         cano3.destruir()
         listaCano.remove(cano3)
+    
+    passaro.desenha_personagem(cenario.tela)
+    passaro.mover()
 
     passaro.colisao(canos=cano1.gera_retangulo())
     passaro.colisao(canos=cano2.gera_retangulo())
