@@ -54,6 +54,9 @@ while rodando:
         cano3.destruir()
         listaCano.remove(cano3)
 
+    passaro.colisao(canos=cano1.gera_retangulo())
+    passaro.colisao(canos=cano2.gera_retangulo())
+    passaro.colisao(canos=cano3.gera_retangulo())
 
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:

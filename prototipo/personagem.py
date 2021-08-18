@@ -25,8 +25,12 @@ class Personagem:
     def tecla_pressionada(self):
         return self.__tecla_pressionada
 
+    def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
+        retangulo = pygame.Rect(self.__x, self.__y, 35, 35)
+        return retangulo
+
     def desenha_personagem(self, tela):
-        pygame.draw.rect(tela, (255, 0, 0), pygame.Rect(self.__x, self.__y, 35, 35))
+        pygame.draw.rect(tela, (255, 0, 0), self.gera_retangulo())
 
     def mover(self):
         # confere se o personagem está voando para aplicar a gravidade sobre ele
@@ -57,3 +61,10 @@ class Personagem:
         # checa se o personagem saiu da tela
         elif self.__y <= 0:
             self.game_over = True
+    
+    def colisao(self, canos):
+        # checha se o personagem colidiu com os canos
+        if self.voando and not self.game_over:
+            if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
+                self.game_over = True
+
