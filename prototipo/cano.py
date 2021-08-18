@@ -4,25 +4,26 @@ import random
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
 
-
-
 class Cano:
-    def __init__(self):
-        super().__init__() 
+    def __init__(self, tamanho_tela):
 
-        bases = self.tamanhoCano(760)
-        
-        self.__largura = 35
-        self.base_superior = bases[0]
-        self.base_inferior = 120   
+        self.tamanho_tela = tamanho_tela
+
+        bases = self.tamanhoCano(self.tamanho_tela)
+
         self.__x = 760
         self.__y1 = 0
         self.__y2 = bases[1]  
+        self.base_superior = bases[0]
+        self.base_inferior = self.tamanho_tela - bases[1] 
+        self.__largura = 35
 
+    @property
+    def x(self):
+        return self.__x
 
     def geraCano(self, tela):
-
-        bases = self.tamanhoCano(760)
+        
         pygame.draw.rect(tela, (0, 255, 0), pygame.Rect(self.__x, self.__y1, self.__largura, self.base_superior))
         pygame.draw.rect(tela, (0, 255, 0), pygame.Rect(self.__x, self.__y2, self.__largura, self.base_inferior))
 
@@ -38,3 +39,6 @@ class Cano:
 
     def move(self):
         self.__x += -5
+
+    def destruir(self):
+        self.__x = 760
