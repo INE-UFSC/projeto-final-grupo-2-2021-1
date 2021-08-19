@@ -1,6 +1,3 @@
-# Vamos tentar reunir nesse aqreuivo as funcionalidades do programa
-# De inicio é importante a gente apenas fazer o jogo funcionar e depois ir separando as coisas
-
 import random
 import pygame
 from personagem import Personagem
@@ -90,7 +87,18 @@ while rodando:
     # para conferir se o personagem coleta o item
     for objeto in listaObjetos:
         if isinstance(objeto, Itens):
-            passaro.pegou_item(item=objeto)
+            passaro.pegou_item(item=objeto, personagem=passaro)
+    
+    # controla o tempo de duração do efeito do item
+    # ainda precisa ser melhorado, para que o personagem possa receber dois efeitos diferentes ao mesmo tempo 
+    if item.timer is not None:  # verifica se o item já está ativo
+        item.timer.contador_tempo()
+        if item.timer.fim_contagem():  # verifica o tempo de duração do item
+            # local para reverter mudanças dos itens, provavelmente vamos ter que implementar um método específico pra isso
+            # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 65 do arquivo "itens"
+            # passaro.tamanho = 35
+            item.timer = None
+
 
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
