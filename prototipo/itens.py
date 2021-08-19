@@ -1,5 +1,6 @@
 import pygame
 import random
+from contador import Contador
 
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
@@ -17,10 +18,19 @@ class Itens:
         self.__x = 0
         self.__y = 0
         self.distancia_do_cano = 70
+        self.__timer = None
 
     @property
     def x(self):
         return self.__x
+    
+    @property
+    def timer(self):
+        return self.__timer
+    
+    @timer.setter
+    def timer(self, tempo):
+        self.__timer = tempo
 
     def posicao_tela(self): #Sorteia uma posicão que o item vai ficar na tela
 
@@ -50,5 +60,12 @@ class Itens:
         self.__x = 780
         self.criado = False
     
-    def efeito(self):  # aplica o efeito do item, método a ser especializado nas subclasses
+    def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
+        # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 102 do arquivo "app"
+        # personagem.tamanho = 15
         pass
+    
+    def iniciar_contador(self, tempo):  # controla o tempo de duração do item
+        self.__timer = Contador()
+        self.__timer.setar_tempo(tempo_para_contar=tempo)
+        self.__timer.contador_tempo()
