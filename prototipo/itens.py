@@ -14,7 +14,7 @@ class Itens:
         self.tela_jogo = tela_jogo
         self.largura_item = 15
         self.__x = 0
-        self.__y = 300
+        self.__y = 0
         self.distancia_do_cano = 70
 
     @property
@@ -23,15 +23,20 @@ class Itens:
 
     def posicao_tela(self): #Sorteia uma posicão que o item vai ficar na tela
 
-        range_inicio = self.largura_tela + self.distancia_do_cano + self.largura_cano
-        range_final = self.largura_tela + \
+        range_inicio_y = self.distancia_do_cano
+        range_final_y = self.altura_tela - self.distancia_do_cano
+
+        self.__y = random.randint(range_inicio_y, range_final_y)
+
+        range_inicio_x = self.largura_tela + self.distancia_do_cano + self.largura_cano
+        range_final_x = self.largura_tela + \
                     (self.largura_tela - (self.posicao_gera_cano + self.distancia_do_cano))
 
-        self.__x = random.randint(range_inicio, range_final)
+        self.__x = random.randint(range_inicio_x, range_final_x)
 
     def desenha_objeto(self): #Desenha o item na tela do jogo
             
-        pygame.draw.rect(self.tela_jogo, (30, 0, 180), pygame.Rect(self.__x, 300, self.largura_item, self.largura_item,))
+        pygame.draw.rect(self.tela_jogo, (30, 0, 180), pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item,))
    
     def move(self):
         self.__x += -5
