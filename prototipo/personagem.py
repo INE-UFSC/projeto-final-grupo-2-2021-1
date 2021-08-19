@@ -12,6 +12,7 @@ class Personagem:
         self.__tecla_pressionada = False
         self.voando = False
         self.game_over = False
+        self.tamanho = 35
     
     @property
     def x(self):
@@ -26,7 +27,7 @@ class Personagem:
         return self.__tecla_pressionada
 
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
-        retangulo = pygame.Rect(self.__x, self.__y, 35, 35)
+        retangulo = pygame.Rect(self.__x, self.__y, self.tamanho, self.tamanho)
         return retangulo
 
     def desenha_personagem(self, tela):
@@ -67,4 +68,11 @@ class Personagem:
         if self.voando and not self.game_over:
             if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
                 self.game_over = True
+
+    def pegou_item(self, item):
+        # confere se o item foi coletado
+        # ainda é preciso implementar a lógica para que ele desapareça da tela quando isso acontecer
+        if self.voando and not self.game_over:
+            if self.gera_retangulo().colliderect(item.gera_retangulo()):
+                item.efeito()  # aplica o efeito do item respectivo
 

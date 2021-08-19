@@ -87,6 +87,11 @@ while rodando:
     passaro.colisao(canos=cano2.gera_retangulo())
     passaro.colisao(canos=cano3.gera_retangulo())
 
+    # para conferir se o personagem coleta o item
+    for objeto in listaObjetos:
+        if isinstance(objeto, Itens):
+            passaro.pegou_item(item=objeto)
+
     for evento in pygame.event.get():
         if evento.type == pygame.QUIT:
             rodando = False

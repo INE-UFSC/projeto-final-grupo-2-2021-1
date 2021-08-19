@@ -41,7 +41,7 @@ class Itens:
         return retangulo
 
     def desenha_objeto(self): #Desenha o item na tela do jogo
-        pygame.draw.rect(self.tela_jogo, (160, 160, 160), pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item,))
+        pygame.draw.rect(self.tela_jogo, (160, 160, 160), self.gera_retangulo())
 
     def move(self):
         self.__x += -5
@@ -49,3 +49,6 @@ class Itens:
     def destruir(self):
         self.__x = 780
         self.criado = False
+    
+    def efeito(self):  # aplica o efeito do item, método a ser especializado nas subclasses
+        pass
