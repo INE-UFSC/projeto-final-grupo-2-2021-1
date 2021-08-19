@@ -7,6 +7,7 @@ import random
 class Itens:
     def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
 
+        self.criado = False
         self.largura_cano = 40
         self.posicao_gera_cano = posicao_gera_cano
         self.largura_tela = largura_tela
@@ -33,16 +34,18 @@ class Itens:
                     (self.largura_tela - (self.posicao_gera_cano + self.distancia_do_cano))
 
         self.__x = random.randint(range_inicio_x, range_final_x)
-    
+        self.criado = True
+
     def gera_retangulo(self):    # gera o retângulo que representa a posição do item
         retangulo = pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item)
         return retangulo
 
     def desenha_objeto(self): #Desenha o item na tela do jogo
         pygame.draw.rect(self.tela_jogo, (160, 160, 160), pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item,))
-   
+
     def move(self):
         self.__x += -5
 
     def destruir(self):
         self.__x = 780
+        self.criado = False

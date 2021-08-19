@@ -5,23 +5,19 @@ class Contador:
         self.__terminou = False
         self.__auxiliar = 1
         self.__tempo_contado = 0
-        self.__tempo_fim = 0
+        self.__tempo_fim = -1
 
     def contador_tempo(self):
         tempo = pygame.time.get_ticks()/1000
         if tempo >= self.__auxiliar:
             self.__tempo_contado = self.__auxiliar
             self.__auxiliar += 1
-            print(self.__tempo_contado)
   
     def setar_tempo(self, tempo_para_contar):
         self.__terminou = False
         self.__tempo_fim = self.__tempo_contado + tempo_para_contar
 
-        print(self.__tempo_fim)
-
     def fim_contagem(self):
         if self.__tempo_fim == self.__tempo_contado:
             self.__terminou = True 
-            print('Terminouuuuu')
         return self.__terminou
