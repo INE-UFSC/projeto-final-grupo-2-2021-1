@@ -12,7 +12,7 @@ class Itens:
         self.largura_tela = largura_tela
         self.altura_tela = altura_tela
         self.tela_jogo = tela_jogo
-        self.largura_item = 15
+        self.largura_item = 20
         self.__x = 0
         self.__y = 0
         self.distancia_do_cano = 70
@@ -34,9 +34,12 @@ class Itens:
 
         self.__x = random.randint(range_inicio_x, range_final_x)
 
+    def gera_retangulo(self):    # gera o retângulo que representa a posição do item
+        retangulo = pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item)
+        return retangulo
+
     def desenha_objeto(self): #Desenha o item na tela do jogo
-            
-        pygame.draw.rect(self.tela_jogo, (30, 0, 180), pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item,))
+        pygame.draw.rect(self.tela_jogo, (160, 160, 160), pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item,))
    
     def move(self):
         self.__x += -5

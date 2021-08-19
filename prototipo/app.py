@@ -7,12 +7,16 @@ from cenario import Cenario
 from pygame.locals import *
 from cano import Cano
 from itens import Itens
+from contador import Contador
+
 
 pygame.init() 
 
 cenario = Cenario()
 clock = pygame.time.Clock()
 fps = 60
+
+contador = Contador()
 
 item = Itens(780, 640, cenario.tela, 320)
 
@@ -26,6 +30,9 @@ listaObjetos = [cano1]
 
 rodando = True
 while rodando:
+    contador.contador_tempo()
+ 
+    contador.fim_contagem()
 
     clock.tick(fps)
     cenario.tela.fill((0, 0, 150))
