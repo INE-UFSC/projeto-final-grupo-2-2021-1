@@ -31,9 +31,10 @@ while rodando:
     cenario.tela.fill((0, 0, 150))
     
     for parte in listaObjetos:
-        parte.desenha_objeto()
-        if not passaro.game_over:  # caso ocorra um "game over" os canos param de mover
-            parte.move()
+        if passaro.voando is True:
+            parte.desenha_objeto()
+            if not passaro.game_over:  # caso ocorra um "game over" os canos param de mover
+                parte.move()
 
     if cano1.x == 320:
         item.posicao_tela()
