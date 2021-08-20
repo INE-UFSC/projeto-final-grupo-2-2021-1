@@ -9,7 +9,7 @@ from pygame.locals import *
 from cano import Cano
 from itens import Itens
 from contador import Contador
-
+from pontuacao import Pontuacao
 
 pygame.init() 
 
@@ -27,17 +27,24 @@ cano3 = Cano(780, 640, cenario.tela)
 
 passaro = Personagem(x=160, y=300)
 
+pontos_jogador = Pontuacao()
+
 listaObjetos = [cano1]
 
 rodando = True
 while rodando:
     contador.contador_tempo()
+    pontos_jogador.mostra_ponto(passaro.game_over)
 
     clock.tick(fps)
     cenario.tela.fill((0, 0, 150))
     
     for parte in listaObjetos:
         parte.desenha_objeto()
+        if isinstance(parte, Cano):
+            if parte.x == 120:
+                pontos_jogador.marca_ponto(1)
+
         if not passaro.game_over and passaro.voando:  # caso ocorra um "game over" os canos param de mover
             parte.move()
 
