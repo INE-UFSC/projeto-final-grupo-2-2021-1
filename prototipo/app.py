@@ -21,12 +21,10 @@ fps = 60
 
 contador = Contador()
 
-# para testar o funcionamento dos itens, substituir "Itens" abaixo por "ItemTamanho" ou "ItemInvencibilidade"
 item_tamanho = ItemTamanho(780, 640, cenario.tela, 320)
 item_invencibilidade = ItemInvencibilidade(780, 640, cenario.tela, 320)
 lista_itens = [item_tamanho, item_invencibilidade]
 item = random.choice(lista_itens)
-# ainda precisamos pensar em uma forma de gerar aleatoriamente itens de ambos os tipos
 
 ignorar_item = False
 
