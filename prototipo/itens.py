@@ -9,6 +9,7 @@ class Itens:
     def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
 
         self.criado = False
+        self.coletado = False
         self.largura_cano = 40
         self.posicao_gera_cano = posicao_gera_cano
         self.largura_tela = largura_tela
@@ -62,10 +63,7 @@ class Itens:
     
     def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
         # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 102 do arquivo "app"
-        # personagem.tamanho = 15
+        personagem.tamanho = 15
         pass
+
     
-    def iniciar_contador(self, tempo):  # controla o tempo de duração do item
-        self.__timer = Contador()
-        self.__timer.setar_tempo(tempo_para_contar=tempo)
-        self.__timer.contador_tempo()

@@ -1,3 +1,6 @@
+# Vamos tentar reunir nesse aqreuivo as funcionalidades do programa
+# De inicio é importante a gente apenas fazer o jogo funcionar e depois ir separando as coisas
+
 import random
 import pygame
 from personagem import Personagem
@@ -29,8 +32,6 @@ listaObjetos = [cano1]
 rodando = True
 while rodando:
     contador.contador_tempo()
- 
-    contador.fim_contagem()
 
     clock.tick(fps)
     cenario.tela.fill((0, 0, 150))
@@ -53,7 +54,7 @@ while rodando:
     
     if cano2.x == 320:
         if item.criado == False:
-            if random.randint(1, 20) == 1:
+            if random.randint(1, 1) == 1:
                item.posicao_tela()
                listaObjetos.append(item)        
         cano3.tamanho_cano()
@@ -64,7 +65,7 @@ while rodando:
 
     if cano3.x == 320:
         if item.criado == False:
-            if random.randint(1, 20) == 1:
+            if random.randint(1, 1) == 1:
                item.posicao_tela()
                listaObjetos.append(item)
         cano1.tamanho_cano()
@@ -88,15 +89,18 @@ while rodando:
     for objeto in listaObjetos:
         if isinstance(objeto, Itens):
             passaro.pegou_item(item=objeto, personagem=passaro)
+            if objeto.coletado:
+                contador.setar_tempo(5)
+                objeto.coletado = False
+
     
     # controla o tempo de duração do efeito do item
     # ainda precisa ser melhorado, para que o personagem possa receber dois efeitos diferentes ao mesmo tempo 
     if item.timer is not None:  # verifica se o item já está ativo
-        item.timer.contador_tempo()
-        if item.timer.fim_contagem():  # verifica o tempo de duração do item
+        if contador.fim_contagem() == True:  # verifica o tempo de duração do item
             # local para reverter mudanças dos itens, provavelmente vamos ter que implementar um método específico pra isso
             # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 65 do arquivo "itens"
-            # passaro.tamanho = 35
+            passaro.tamanho = 35
             item.timer = None
 
 

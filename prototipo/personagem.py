@@ -75,4 +75,6 @@ class Personagem:
         if self.voando and not self.game_over:
             if self.gera_retangulo().colliderect(item.gera_retangulo()):
                 item.efeito(personagem)  # aplica o efeito do item respectivo
-                item.iniciar_contador(tempo=20)
+                item.coletado = True
+                item.timer = 1 
+

@@ -20,4 +20,5 @@ class Contador:
     def fim_contagem(self):
         if self.__tempo_fim == self.__tempo_contado:
             self.__terminou = True 
+            print('oi')
         return self.__terminou
