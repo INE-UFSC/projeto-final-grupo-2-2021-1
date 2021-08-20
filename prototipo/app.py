@@ -22,7 +22,10 @@ fps = 60
 contador = Contador()
 
 # para testar o funcionamento dos itens, substituir "Itens" abaixo por "ItemTamanho" ou "ItemInvencibilidade"
-item = Itens(780, 640, cenario.tela, 320)
+item_tamanho = ItemTamanho(780, 640, cenario.tela, 320)
+item_invencibilidade = ItemInvencibilidade(780, 640, cenario.tela, 320)
+lista_itens = [item_tamanho, item_invencibilidade]
+item = random.choice(lista_itens)
 # ainda precisamos pensar em uma forma de gerar aleatoriamente itens de ambos os tipos
 
 ignorar_item = False
@@ -66,6 +69,7 @@ while rodando:
         listaObjetos.remove(cano1)
     
     if cano2.x == 320:
+        item = random.choice(lista_itens)
         if item.criado == False:
             if random.randint(1, 1) == 1:
                item.posicao_tela()
@@ -90,7 +94,8 @@ while rodando:
     if item.x < -40:
         item.destruir()
         listaObjetos.remove(item)
-    
+        item = random.choice(lista_itens)
+
     passaro.desenha_personagem(cenario.tela)
     passaro.mover()
 
@@ -109,14 +114,14 @@ while rodando:
                 contador.setar_tempo(5)
                 objeto.coletado = False
                 ignorar_item = True
-
     
     # controla o tempo de duração do efeito do item
     # ainda precisa ser melhorado, para que o personagem possa receber dois efeitos diferentes ao mesmo tempo 
-    if item.timer is not None:  # verifica se o item já está ativo
+    if ignorar_item == True:  # verifica se o item já está ativo
         if contador.fim_contagem() == True:  # verifica o tempo de duração do item
+            for efeitos in lista_itens:
+                efeitos.reverter(passaro)# reverte o estado do personagem ao que estava antes de coletar o item 
             item.timer = None
-            item.reverter(passaro)  # reverte o estado do personagem ao que estava antes de coletar o item
             ignorar_item = False
 
 

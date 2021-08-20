@@ -10,6 +10,8 @@ class ItemInvencibilidade(Itens):
     
     def efeito(self, personagem):
         personagem.invencivel = True
+        personagem.cor = (0, 0, 0)
     
     def reverter(self, personagem):
         personagem.invencivel = False
+        personagem.cor = (255, 0, 0)

@@ -14,6 +14,7 @@ class Personagem:
         self.game_over = False
         self.tamanho = 35
         self.invencivel = False
+        self.cor = (255, 0, 0)
     
     @property
     def x(self):
@@ -32,7 +33,7 @@ class Personagem:
         return retangulo
 
     def desenha_personagem(self, tela):
-        pygame.draw.rect(tela, (255, 0, 0), self.gera_retangulo())
+        pygame.draw.rect(tela, self.cor, self.gera_retangulo())
 
     def mover(self):
         # confere se o personagem está voando para aplicar a gravidade sobre ele
@@ -73,7 +74,7 @@ class Personagem:
     def pegou_item(self, item, personagem):
         # confere se o item foi coletado
         # ainda é preciso implementar a lógica para que ele desapareça da tela quando isso acontecer
-        if self.voando and not self.game_over:
+        if not self.game_over:
             if self.gera_retangulo().colliderect(item.gera_retangulo()):
                 item.efeito(personagem)  # aplica o efeito do item respectivo
                 item.coletado = True

@@ -9,7 +9,7 @@ class ItemTamanho(Itens):
         self.cor = (255, 255, 0)
     
     def efeito(self, personagem):
-        personagem.tamanho = personagem.tamanho // 2
+        personagem.tamanho = 18
 
     def reverter(self, personagem):
-        personagem.tamanho = personagem.tamanho * 2
+        personagem.tamanho = 35
