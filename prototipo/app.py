@@ -10,6 +10,8 @@ from cano import Cano
 from itens import Itens
 from contador import Contador
 from pontuacao import Pontuacao
+from itemTamanho import ItemTamanho
+from itemInvencibilidade import ItemInvencibilidade
 
 pygame.init() 
 
@@ -19,7 +21,11 @@ fps = 60
 
 contador = Contador()
 
+# para testar o funcionamento dos itens, substituir "Itens" abaixo por "ItemTamanho" ou "ItemInvencibilidade"
 item = Itens(780, 640, cenario.tela, 320)
+# ainda precisamos pensar em uma forma de gerar aleatoriamente itens de ambos os tipos
+
+ignorar_item = False
 
 cano1 = Cano(780, 640, cenario.tela)
 cano2 = Cano(780, 640, cenario.tela)
@@ -94,21 +100,24 @@ while rodando:
 
     # para conferir se o personagem coleta o item
     for objeto in listaObjetos:
-        if isinstance(objeto, Itens):
+        if isinstance(objeto, Itens) and not ignorar_item: 
+            # adicionei a variável "ignorar_item" para que o item tenha efeito sobre o personagem apenas uma vez (quando é coletado)
+            # e não por todo o período em que o personagem tem contato com ele
+            # provavelmente isso será desnecessário quando conseguirmos fazer o item desaparecer assim que for coletado 
             passaro.pegou_item(item=objeto, personagem=passaro)
             if objeto.coletado:
                 contador.setar_tempo(5)
                 objeto.coletado = False
+                ignorar_item = True
 
     
     # controla o tempo de duração do efeito do item
     # ainda precisa ser melhorado, para que o personagem possa receber dois efeitos diferentes ao mesmo tempo 
     if item.timer is not None:  # verifica se o item já está ativo
         if contador.fim_contagem() == True:  # verifica o tempo de duração do item
-            # local para reverter mudanças dos itens, provavelmente vamos ter que implementar um método específico pra isso
-            # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 65 do arquivo "itens"
-            passaro.tamanho = 35
             item.timer = None
+            item.reverter(passaro)  # reverte o estado do personagem ao que estava antes de coletar o item
+            ignorar_item = False
 
 
     for evento in pygame.event.get():

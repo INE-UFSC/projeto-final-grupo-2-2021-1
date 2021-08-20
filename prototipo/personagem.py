@@ -13,6 +13,7 @@ class Personagem:
         self.voando = False
         self.game_over = False
         self.tamanho = 35
+        self.invencivel = False
     
     @property
     def x(self):
@@ -65,7 +66,7 @@ class Personagem:
     
     def colisao(self, canos):
         # checha se o personagem colidiu com os canos
-        if self.voando and not self.game_over:
+        if self.voando and not self.game_over and not self.invencivel:
             if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
                 self.game_over = True
 

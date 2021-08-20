@@ -20,6 +20,7 @@ class Itens:
         self.__y = 0
         self.distancia_do_cano = 70
         self.__timer = None
+        self.cor = (160, 160, 160)
 
     @property
     def x(self):
@@ -52,7 +53,7 @@ class Itens:
         return retangulo
 
     def desenha_objeto(self): #Desenha o item na tela do jogo
-        pygame.draw.rect(self.tela_jogo, (160, 160, 160), self.gera_retangulo())
+        pygame.draw.rect(self.tela_jogo, self.cor, self.gera_retangulo())
 
     def move(self):
         self.__x += -5
@@ -62,8 +63,7 @@ class Itens:
         self.criado = False
     
     def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
-        # caso queiram testar o funcionamento, descomentem a linha abaixo e a linha 102 do arquivo "app"
-        personagem.tamanho = 15
         pass
 
-    
+    def reverter(self, personagem):  # reverte o efeito do item
+        pass
