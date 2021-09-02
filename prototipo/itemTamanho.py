@@ -1,9 +1,9 @@
 # Item com efeito de diminuir o tamanho do personagem 
 
-from itens import Itens
+from item import Item
 
 
-class ItemTamanho(Itens):
+class ItemTamanho(Item):
     def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
         super().__init__(largura_tela, altura_tela, tela_jogo, posicao_gera_cano)
         self.cor = (255, 255, 0)

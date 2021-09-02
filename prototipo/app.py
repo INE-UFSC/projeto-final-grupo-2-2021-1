@@ -7,7 +7,7 @@ from personagem import Personagem
 from cenario import Cenario
 from pygame.locals import *
 from cano import Cano
-from itens import Itens
+from item import Item
 from contador import Contador
 from pontuacao import Pontuacao
 from itemTamanho import ItemTamanho
@@ -103,7 +103,7 @@ while rodando:
 
     # para conferir se o personagem coleta o item
     for objeto in listaObjetos:
-        if isinstance(objeto, Itens) and not ignorar_item: 
+        if isinstance(objeto, Item) and not ignorar_item: 
             # adicionei a variável "ignorar_item" para que o item tenha efeito sobre o personagem apenas uma vez (quando é coletado)
             # e não por todo o período em que o personagem tem contato com ele
             # provavelmente isso será desnecessário quando conseguirmos fazer o item desaparecer assim que for coletado 

@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 import pygame
 import random
 from contador import Contador
@@ -5,7 +6,7 @@ from contador import Contador
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
 
-class Itens:
+class Item(ABC):
     def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
 
         self.criado = False
@@ -62,8 +63,10 @@ class Itens:
         self.__x = 780
         self.criado = False
     
+    @abstractmethod
     def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
         pass
-
+    
+    @abstractmethod
     def reverter(self, personagem):  # reverte o efeito do item
         pass
