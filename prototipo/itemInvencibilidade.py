@@ -5,13 +5,14 @@ from item import Item
 
 
 class ItemInvencibilidade(Item):
-    def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
-        super().__init__(largura_tela, altura_tela, tela_jogo, posicao_gera_cano)
-    
-    def efeito(self, personagem):
-        personagem.invencivel = True
-        personagem.cor = (0, 0, 0)
-    
-    def reverter(self, personagem):
-        personagem.invencivel = False
-        personagem.cor = (255, 0, 0)
+    def __init__(self, tela_jogo, personagem):
+        super().__init__(tela_jogo, personagem)
+        self.personagem = personagem
+
+    def efeito(self):
+        self.personagem.invencivel = True
+        self.personagem.cor = (0, 0, 0)
+
+    def reverter(self):
+        self.personagem.invencivel = False
+        self.personagem.cor = (255, 0, 0)

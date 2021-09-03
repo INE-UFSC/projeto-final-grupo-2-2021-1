@@ -4,12 +4,13 @@ from item import Item
 
 
 class ItemTamanho(Item):
-    def __init__(self, largura_tela, altura_tela, tela_jogo, posicao_gera_cano):
-        super().__init__(largura_tela, altura_tela, tela_jogo, posicao_gera_cano)
+    def __init__(self, tela_jogo, persongem):
+        super().__init__(tela_jogo, persongem)
         self.cor = (255, 255, 0)
+        self.personagem = persongem
     
-    def efeito(self, personagem):
-        personagem.tamanho = 18
+    def efeito(self):
+        self.personagem.tamanho = 18
 
-    def reverter(self, personagem):
-        personagem.tamanho = 35
+    def reverter(self):
+        self.personagem.tamanho = 35
