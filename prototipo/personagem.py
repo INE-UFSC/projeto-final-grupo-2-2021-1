@@ -71,12 +71,12 @@ class Personagem:
             if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
                 self.game_over = True
 
-    def pegou_item(self, item, personagem):
+    def pegou_item(self, item):
         # confere se o item foi coletado
         # ainda é preciso implementar a lógica para que ele desapareça da tela quando isso acontecer
         if not self.game_over:
             if self.gera_retangulo().colliderect(item.gera_retangulo()):
-                item.efeito(personagem)  # aplica o efeito do item respectivo
+                item.efeito()  # aplica o efeito do item respectivo
                 item.coletado = True
                 item.timer = 1 
 

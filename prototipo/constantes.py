@@ -6,3 +6,6 @@ class Constante:
     largura_item = 20
     distancia_item_cano = 70
     posicao_destruir = -40
+    posicao_personagem_x = 160
+    posicao_personagem_y = 300
+    fps = 60
