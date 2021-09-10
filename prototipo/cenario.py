@@ -11,3 +11,6 @@ class Cenario:
 
     def tela(self):
         return self.tela
+    
+    def inicializa_tela(self):
+        self.tela.fill((0, 0, 150))

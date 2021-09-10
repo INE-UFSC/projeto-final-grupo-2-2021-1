@@ -29,7 +29,7 @@ class Cano:
         if self.__x < const.posicao_destruir:
             self.destruir()
         self.desenha_objeto()
-        self.move()
+        #self.move()
 
     def tamanho_cano(self): #Altera o tamnho do cano
 
