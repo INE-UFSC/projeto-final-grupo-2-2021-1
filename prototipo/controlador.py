@@ -50,29 +50,28 @@ class Controlador:
 
 
     def gera_objetos(self):
+
+        self.controla_canos()
+
         for objeto in self.__lista_objetos:
             objeto.atualiza()
             if self.__personagem.voando and not self.__personagem.game_over:
                 objeto.move()
 
-        self.controla_canos()
+        
 
     def controla_canos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
-            self.__lista_objetos.append(self.__cano_1)
+            self.__lista_objetos.append(Cano(self.__cenario.tela))
 
         for objeto in self.__lista_objetos:
-            if isinstance(objeto, Cano):
-                if objeto.x == const.posicao_gera_cano:
-                    if self.__cano_1.tamanho_cano_definido == False:
-                        self.__lista_objetos.append(self.__cano_1)
-                    elif self.__cano_2.tamanho_cano_definido == False:
-                        self.__lista_objetos.append(self.__cano_2)    
-                    elif self.__cano_3.tamanho_cano_definido == False:
-                        self.__lista_objetos.append(self.__cano_3)
+            if objeto.x == const.posicao_gera_cano:
+                self.__lista_objetos.append(Cano(self.__cenario.tela))
 
-                if objeto.x < const.posicao_destruir:
+                if objeto.x <= const.posicao_destruir:
+                    print('ola')
                     self.__lista_objetos.remove(objeto)
+                    
             
 
     def instancia_canos(self):

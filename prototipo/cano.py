@@ -26,8 +26,8 @@ class Cano:
     def atualiza(self):
         if not self.tamanho_cano_definido:
             self.tamanho_cano()
-        if self.__x < const.posicao_destruir:
-            self.destruir()
+        #if self.__x <= const.posicao_destruir:
+         #  self.destruir()
         self.desenha_objeto()
         #self.move()
 
