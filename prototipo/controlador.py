@@ -67,10 +67,9 @@ class Controlador:
         for objeto in self.__lista_objetos:
             if objeto.x == const.posicao_gera_cano:
                 self.__lista_objetos.append(Cano(self.__cenario.tela))
-
-                if objeto.x <= const.posicao_destruir:
-                    print('ola')
-                    self.__lista_objetos.remove(objeto)
+            if objeto.x <= const.posicao_destruir:
+                self.__lista_objetos.remove(objeto)
+                del objeto
                     
             
 
