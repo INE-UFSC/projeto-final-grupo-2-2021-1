@@ -23,8 +23,6 @@ class Controlador:
         self.__personagem = Personagem(const.posicao_personagem_x, const.posicao_personagem_y)
         self.__cenario = Cenario()
         self.__contador = Contador()
-        self.instancia_canos()
-        self.instancia_itens()
         self.__lista_objetos = []
         self.__pontuacao = Pontuacao()
 
@@ -58,32 +56,29 @@ class Controlador:
             if self.__personagem.voando and not self.__personagem.game_over:
                 objeto.move()
 
-        
-
     def controla_canos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
             self.__lista_objetos.append(Cano(self.__cenario.tela))
 
         for objeto in self.__lista_objetos:
             if objeto.x == const.posicao_gera_cano:
-                self.__lista_objetos.append(Cano(self.__cenario.tela))
+                if isinstance(objeto, Cano):
+                    self.__lista_objetos.append(Cano(self.__cenario.tela))
+                    self.instancia_itens()
+
             if objeto.x <= const.posicao_destruir:
                 self.__lista_objetos.remove(objeto)
                 del objeto
-                    
-            
-
-    def instancia_canos(self):
-        self.__cano_1 = Cano(self.__cenario.tela)
-        self.__cano_2 = Cano(self.__cenario.tela)
-        self.__cano_3 = Cano(self.__cenario.tela)
-
+             
     def instancia_itens(self):
         self.__item_1 = ItemTamanho(self.__cenario.tela, self.__personagem)
         self.__item_2 = ItemInvencibilidade(self.__cenario.tela, self.__personagem)
 
         lista_itens = [self.__item_1, self.__item_2]
         item = random.choice(lista_itens)
+
+        if random.randint(1,2) == 1:
+            self.__lista_objetos.append(item)
 
     def le_eventos(self):
         for evento in pygame.event.get():

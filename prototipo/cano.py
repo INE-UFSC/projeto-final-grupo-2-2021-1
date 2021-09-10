@@ -26,10 +26,7 @@ class Cano:
     def atualiza(self):
         if not self.tamanho_cano_definido:
             self.tamanho_cano()
-        #if self.__x <= const.posicao_destruir:
-         #  self.destruir()
         self.desenha_objeto()
-        #self.move()
 
     def tamanho_cano(self): #Altera o tamnho do cano
 
@@ -56,7 +53,3 @@ class Cano:
 
     def move(self):
         self.__x += -5
-
-    def destruir(self):
-        self.__x = self.largura_tela
-        self.tamanho_cano_definido = False

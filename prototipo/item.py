@@ -41,10 +41,7 @@ class Item(ABC):
     def atualiza(self): #Faz todo o processo de gerar o item, aplicar o movimento e destruir
         if not self.criado:
             self.define_posicao_tela()
-        if self.__x < const.posicao_destruir:
-            self.destruir()
         self.desenha_objeto()
-        self.move()
 
     def define_posicao_tela(self): #Sorteia uma posicão que o item vai ficar na tela
 
@@ -69,10 +66,6 @@ class Item(ABC):
 
     def move(self):
         self.__x += -5
-
-    def destruir(self): #Manda o item para uma região não visível
-        self.__x = self.largura_tela
-        self.criado = False
     
     @abstractmethod
     def efeito(self):  # aplica o efeito do item, método a ser especializado nas subclasses
