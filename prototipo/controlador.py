@@ -26,6 +26,10 @@ class Controlador:
         self.__lista_objetos = []
         self.__pontuacao = Pontuacao()
 
+    @property
+    def cenario(self):
+        return self.__cenario
+
     def iniciar(self):
 
         pygame.init()
