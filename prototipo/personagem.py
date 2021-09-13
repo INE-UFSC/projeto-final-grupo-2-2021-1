@@ -1,6 +1,8 @@
 # Aqui a gente vai construir a classe do nosso personagem
 # A ideia posteriormente é especializar essa classe, tendo vários personagens com características diferentes
 
+from typing import List
+from cano import Cano
 import pygame
 
 
@@ -65,18 +67,18 @@ class Personagem:
         elif self.__y <= 0:
             self.game_over = True
     
-    def colisao(self, canos):
+''' def colisao(self, objeto):
+        
+        lista_retangulo = objeto.gera_retangulo() 
+        
         # checha se o personagem colidiu com os canos
         if self.voando and not self.game_over and not self.invencivel:
-            if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
-                self.game_over = True
-
-    def pegou_item(self, item):
-        # confere se o item foi coletado
-        # ainda é preciso implementar a lógica para que ele desapareça da tela quando isso acontecer
-        if not self.game_over:
-            if self.gera_retangulo().colliderect(item.gera_retangulo()):
-                item.efeito()  # aplica o efeito do item respectivo
-                item.coletado = True
-                item.timer = 1 
-
+            for retangulo in lista_retangulo:
+                if self.gera_retangulo().colliderect(retangulo):
+                    objeto.colisao()
+            if isinstance(lista_retangulo, list): #objeto com mais de um retângulo
+                 or self.gera_retangulo().colliderect(lista_retangulo[1]) :
+                    objeto.colisao()
+            else: 
+                if self.gera_retangulo().colliderect(lista_retangulo):
+                    objeto.colisao()'''

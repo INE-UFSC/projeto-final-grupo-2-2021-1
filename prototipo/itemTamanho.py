@@ -14,3 +14,8 @@ class ItemTamanho(Item):
 
     def reverter(self):
         self.personagem.tamanho = 35
+
+    def efeito_colisão(self):
+        self.efeito()
+        self.coletado = True
+        self.timer = 1

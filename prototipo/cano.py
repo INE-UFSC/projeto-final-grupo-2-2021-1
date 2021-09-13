@@ -41,7 +41,7 @@ class Cano:
         retangulo1 = pygame.Rect(self.__x, self.__y1, self.__largura_cano, self.base_superior)
         retangulo2 = pygame.Rect(self.__x, self.__y2, self.__largura_cano, self.base_inferior)
         return [retangulo1, retangulo2]
-   
+
     def desenha_objeto(self): #Desenha o cano na tela do jogo
         retangulos = self.gera_retangulo()
 
@@ -50,6 +50,9 @@ class Cano:
         self.base_inferior = self.altura_tela - self.bases[1] 
         pygame.draw.rect(self.tela_jogo, (0, 255, 0), retangulos[0])
         pygame.draw.rect(self.tela_jogo, (0, 255, 0), retangulos[1])
+
+    def efeito_colisao(self, personagem):
+        personagem.game_over = True
 
     def move(self):
         self.__x += -5

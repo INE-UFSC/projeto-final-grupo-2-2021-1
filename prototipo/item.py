@@ -59,10 +59,12 @@ class Item(ABC):
 
     def gera_retangulo(self):    # gera o retângulo que representa a posição do item
         retangulo = pygame.Rect(self.__x, self.__y, self.largura_item, self.largura_item)
-        return retangulo
+        return [retangulo]
 
     def desenha_objeto(self): #Desenha o item na tela do jogo
-        pygame.draw.rect(self.tela_jogo, self.cor, self.gera_retangulo())
+        lista_retangulo = self.gera_retangulo()
+
+        pygame.draw.rect(self.tela_jogo, self.cor, lista_retangulo[0])
 
     def move(self):
         self.__x += -5
@@ -73,4 +75,8 @@ class Item(ABC):
     
     @abstractmethod
     def reverter(self):  # reverte o efeito do item
+        pass
+
+    @abstractmethod
+    def colisão(self):
         pass

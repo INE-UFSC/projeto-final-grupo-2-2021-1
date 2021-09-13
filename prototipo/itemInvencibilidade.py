@@ -16,3 +16,9 @@ class ItemInvencibilidade(Item):
     def reverter(self):
         self.personagem.invencivel = False
         self.personagem.cor = (255, 0, 0)
+    
+    def efeito_colisão(self):
+        self.efeito()
+        self.coletado = True
+        self.timer = 1
+        

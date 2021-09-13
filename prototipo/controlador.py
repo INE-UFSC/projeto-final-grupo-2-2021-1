@@ -17,6 +17,7 @@ from itemTamanho import ItemTamanho
 from contador import Contador
 from constantes import Constante as const
 from pontuacao import Pontuacao
+from colisão import Colisao
 
 class Controlador:
     def __init__(self) -> None:
@@ -25,6 +26,7 @@ class Controlador:
         self.__contador = Contador()
         self.__lista_objetos = []
         self.__pontuacao = Pontuacao()
+        self.__colisao = Colisao()
 
     @property
     def cenario(self):
@@ -42,6 +44,7 @@ class Controlador:
             self.__cenario.inicializa_tela()
             self.__contador.contador_tempo()
             self.gera_objetos()
+            self.colisao()
             self.__personagem.desenha_personagem(self.__cenario.tela)
             self.__personagem.mover()
 
@@ -53,14 +56,14 @@ class Controlador:
 
     def gera_objetos(self):
 
-        self.controla_canos()
+        self.controla_objetos()
 
         for objeto in self.__lista_objetos:
             objeto.atualiza()
             if self.__personagem.voando and not self.__personagem.game_over:
                 objeto.move()
 
-    def controla_canos(self): #Controla os canos da lista de objetos que são gerados
+    def controla_objetos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
             self.__lista_objetos.append(Cano(self.__cenario.tela))
 
@@ -68,7 +71,7 @@ class Controlador:
             if objeto.x == const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
                     self.__lista_objetos.append(Cano(self.__cenario.tela))
-                    self.instancia_itens()
+                    ##self.instancia_itens()
 
             if objeto.x <= const.posicao_destruir:
                 self.__lista_objetos.remove(objeto)
@@ -83,6 +86,10 @@ class Controlador:
 
         if random.randint(1,2) == 1:
             self.__lista_objetos.append(item)
+
+    def colisao(self):
+        for objeto in self.__lista_objetos:
+            self.__colisao.detectar_colisão(self.__personagem, objeto)
 
     def le_eventos(self):
         for evento in pygame.event.get():
