@@ -13,11 +13,19 @@ class Contador:
             self.__tempo_contado = self.__auxiliar
             self.__auxiliar += 1
   
-    def setar_tempo(self, tempo_para_contar):
+    def inicia_contagem(self, tempo_para_contar):
         self.__terminou = False
         self.__tempo_fim = self.__tempo_contado + tempo_para_contar
 
     def fim_contagem(self):
         if self.__tempo_fim == self.__tempo_contado:
-            self.__terminou = True 
+            self.__terminou = True
         return self.__terminou
+    
+    def duracao_item(self, duracao):
+        if self.__terminou == True:
+            self.inicia_contagem(duracao)
+        self.contador_tempo()
+        if self.fim_contagem() == True:
+            return True
+        return False

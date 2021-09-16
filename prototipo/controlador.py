@@ -6,6 +6,7 @@
 # 4. Lógica para contabilizar a pontuação
 
 
+from item import Item
 import random
 import pygame
 from pygame.locals import *
@@ -25,6 +26,7 @@ class Controlador:
         self.__cenario = Cenario()
         self.__contador = Contador()
         self.__lista_objetos = []
+        self.__itens_ativos = []
         self.__pontuacao = Pontuacao()
         self.__colisao = Colisao()
 
@@ -45,6 +47,7 @@ class Controlador:
             self.__contador.contador_tempo()
             self.gera_objetos()
             self.colisao()
+            self.itens_ativos()
             self.__personagem.desenha_personagem(self.__cenario.tela)
             self.__personagem.mover()
 
@@ -71,25 +74,40 @@ class Controlador:
             if objeto.x == const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
                     self.__lista_objetos.append(Cano(self.__cenario.tela))
-                    ##self.instancia_itens()
+                    self.instancia_itens()
 
             if objeto.x <= const.posicao_destruir:
                 self.__lista_objetos.remove(objeto)
                 del objeto
              
     def instancia_itens(self):
-        self.__item_1 = ItemTamanho(self.__cenario.tela, self.__personagem)
-        self.__item_2 = ItemInvencibilidade(self.__cenario.tela, self.__personagem)
+        self.__item_1 = ItemTamanho(self.__cenario.tela)
+        self.__item_2 = ItemInvencibilidade(self.__cenario.tela)
 
         lista_itens = [self.__item_1, self.__item_2]
         item = random.choice(lista_itens)
 
-        if random.randint(1,2) == 1:
+        if random.randint(1,4) == 1:
             self.__lista_objetos.append(item)
+
+    def itens_ativos(self):
+        for item in self.__lista_objetos:
+            if item.colidiu:
+                self.__itens_ativos.append(item)
+                self.__lista_objetos.remove(item)
+        
+        if self.__itens_ativos is not None:
+            for item in self.__itens_ativos:
+                item.tempo_efeito()
+                if item.colidiu == False:
+                    self.__itens_ativos.remove(item)
+                    del item
 
     def colisao(self):
         for objeto in self.__lista_objetos:
             self.__colisao.detectar_colisão(self.__personagem, objeto)
+    
+
 
     def le_eventos(self):
         for evento in pygame.event.get():

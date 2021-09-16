@@ -9,3 +9,5 @@ class Constante:
     posicao_personagem_x = 160
     posicao_personagem_y = 300
     fps = 60
+    tempo_invencibilidade = 5
+    tempo_pequeno = 7

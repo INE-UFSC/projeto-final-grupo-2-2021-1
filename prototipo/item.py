@@ -9,7 +9,7 @@ from constantes import Constante as const
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
 
 class Item(ABC):
-    def __init__(self, tela_jogo, personagem: Personagem):
+    def __init__(self, tela_jogo):
 
         self.tela_jogo = tela_jogo
         self.largura_cano = const.largura_cano
@@ -19,10 +19,10 @@ class Item(ABC):
         self.distancia_do_cano = const.distancia_item_cano
         self.posicao_gera_cano = const.posicao_gera_cano      
         self.criado = False
-        self.coletado = False
+        self.colidiu = False
         self.__x = 0
         self.__y = 0
-        
+
         self.__timer = None
         self.cor = (160, 160, 160)
 
@@ -69,8 +69,12 @@ class Item(ABC):
     def move(self):
         self.__x += -5
     
+    def efeito_colisao(self, personagem):
+        self.efeito(personagem)
+        self.timer = 1
+
     @abstractmethod
-    def efeito(self):  # aplica o efeito do item, método a ser especializado nas subclasses
+    def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
         pass
     
     @abstractmethod
@@ -78,5 +82,5 @@ class Item(ABC):
         pass
 
     @abstractmethod
-    def colisão(self):
+    def tempo_efeito(self, duracao):
         pass

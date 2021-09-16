@@ -18,6 +18,7 @@ class Cano:
         self.base_superior = 0 
         self.base_inferior = 0
         self.tamanho_cano_definido = False
+        self.colidiu = False
 
     @property
     def x(self):
@@ -53,6 +54,7 @@ class Cano:
 
     def efeito_colisao(self, personagem):
         personagem.game_over = True
+        self.colidiu = True
 
     def move(self):
         self.__x += -5
