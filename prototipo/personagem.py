@@ -55,8 +55,7 @@ class Personagem:
             
             if not teclas[pygame.K_UP]:
                 self.__tecla_pressionada = False
-        
-        self.morreu()
+
     
     def morreu(self):
         # checa se o personagem atingiu o chão

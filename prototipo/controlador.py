@@ -48,14 +48,18 @@ class Controlador:
             self.gera_objetos()
             self.colisao()
             self.itens_ativos()
-            self.__personagem.desenha_personagem(self.__cenario.tela)
-            self.__personagem.mover()
+            self.atualiza_personagem()
 
             self.le_eventos()
             pygame.display.update()
         
         pygame.quit()
 
+
+    def atualiza_personagem(self):
+        self.__personagem.desenha_personagem(self.__cenario.tela)
+        self.__personagem.mover()
+        self.__personagem.morreu()
 
     def gera_objetos(self):
 
