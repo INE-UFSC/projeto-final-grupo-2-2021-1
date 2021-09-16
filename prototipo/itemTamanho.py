@@ -7,19 +7,14 @@ class ItemTamanho(Item):
     def __init__(self, tela_jogo):
         super().__init__(tela_jogo)
         self.cor = (255, 255, 0)
-        self.__contador = Contador()
+        self.tempo_efeito = const.tempo_pequeno
     
     def efeito(self, personagem):
         self.__personagem = personagem
         self.__personagem.tamanho = 18
         self.colidiu = True
+        self.ativo = True
 
     def reverter(self):
         self.__personagem.tamanho = 35
-        self.colidiu = False
-
-    def tempo_efeito(self):
-        if self.__contador.duracao_item(const.tempo_pequeno) == True:
-            self.reverter()
-            return True
-        return False
+        self.ativo = False

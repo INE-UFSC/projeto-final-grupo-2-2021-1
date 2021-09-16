@@ -8,24 +8,17 @@ from constantes import Constante as const
 class ItemInvencibilidade(Item):
     def __init__(self, tela_jogo):
         super().__init__(tela_jogo)
-        self.__contador = Contador()
+        self.tempo_efeito = const.tempo_invencibilidade
 
     def efeito(self, personagem):
         self.__personagem = personagem
         self.__personagem.invencivel = True
         self.__personagem.cor = (0, 0, 0)
         self.colidiu = True
+        self.ativo = True
 
     def reverter(self):
         self.__personagem.invencivel = False
         self.__personagem.cor = (255, 0, 0)
-        self.colidiu = False
+        self.ativo = False
 
-    def tempo_efeito(self):
-        if self.__contador.duracao_item(const.tempo_invencibilidade) == True:
-            self.reverter()
-            return True
-        return False
-
-    
-        

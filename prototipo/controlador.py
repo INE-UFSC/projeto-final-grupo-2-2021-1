@@ -91,17 +91,18 @@ class Controlador:
             self.__lista_objetos.append(item)
 
     def itens_ativos(self):
+
         for item in self.__lista_objetos:
-            if item.colidiu:
+            if item.colidiu and isinstance(item, Item):
                 self.__itens_ativos.append(item)
                 self.__lista_objetos.remove(item)
         
-        if self.__itens_ativos is not None:
+        if len(self.__itens_ativos) != 0:
             for item in self.__itens_ativos:
-                item.tempo_efeito()
-                if item.colidiu == False:
-                    self.__itens_ativos.remove(item)
-                    del item
+               self.__contador.duracao_item(item)
+               if item.ativo == False:
+                   self.__itens_ativos.remove(item)
+                   del item
 
     def colisao(self):
         for objeto in self.__lista_objetos:

@@ -22,10 +22,9 @@ class Contador:
             self.__terminou = True
         return self.__terminou
     
-    def duracao_item(self, duracao):
-        if self.__terminou == True:
-            self.inicia_contagem(duracao)
-        self.contador_tempo()
+    def duracao_item(self, item):
+        if item.colidiu:
+            self.inicia_contagem(item.tempo_efeito)
+            item.colidiu = False
         if self.fim_contagem() == True:
-            return True
-        return False
+            item.reverter()

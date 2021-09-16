@@ -20,6 +20,7 @@ class Item(ABC):
         self.posicao_gera_cano = const.posicao_gera_cano      
         self.criado = False
         self.colidiu = False
+        self.ativo = False
         self.__x = 0
         self.__y = 0
 
@@ -79,8 +80,4 @@ class Item(ABC):
     
     @abstractmethod
     def reverter(self):  # reverte o efeito do item
-        pass
-
-    @abstractmethod
-    def tempo_efeito(self, duracao):
         pass
