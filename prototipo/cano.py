@@ -8,7 +8,7 @@ from constantes import Constante
 class Cano:
     def __init__(self, tela_jogo):
 
-        self.const = Constante
+        self.const = Constante()
         self.tela_jogo = tela_jogo
         self.largura_tela = self.const.tela_jogo_largura
         self.altura_tela = self.const.tela_jogo_altura

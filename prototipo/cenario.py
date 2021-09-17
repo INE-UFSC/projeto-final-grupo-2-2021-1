@@ -11,3 +11,6 @@ class Cenario:
     
     def inicializa_tela(self):
         self.tela.fill((0, 0, 150))
+    
+    def escreve_pontuacao(self, pontuacao):
+        self.tela.blit(pontuacao, (0,0))

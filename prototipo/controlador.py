@@ -30,6 +30,7 @@ class Controlador:
         self.__itens_ativos = []
         self.__pontuacao = Pontuacao()
         self.__colisao = Colisao()
+
     @property
     def cenario(self):
         return self.__cenario
@@ -49,6 +50,7 @@ class Controlador:
             self.colisao()
             self.itens_ativos()
             self.atualiza_personagem()
+            self.pontuacao()
 
             self.le_eventos()
             pygame.display.update()
@@ -119,7 +121,7 @@ class Controlador:
                 if isinstance(cano, Cano):
                     self.__pontuacao.marca_ponto(1)
 
-        self.__pontuacao.mostra_ponto(self.game_over)
+        self.__cenario.escreve_pontuacao(self.__pontuacao.mostra_ponto())
 
     def le_eventos(self):
         for evento in pygame.event.get():
