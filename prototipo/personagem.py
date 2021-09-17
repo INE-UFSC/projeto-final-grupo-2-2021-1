@@ -66,18 +66,3 @@ class Personagem:
         elif self.__y <= 0:
             self.game_over = True
     
-''' def colisao(self, objeto):
-        
-        lista_retangulo = objeto.gera_retangulo() 
-        
-        # checha se o personagem colidiu com os canos
-        if self.voando and not self.game_over and not self.invencivel:
-            for retangulo in lista_retangulo:
-                if self.gera_retangulo().colliderect(retangulo):
-                    objeto.colisao()
-            if isinstance(lista_retangulo, list): #objeto com mais de um retângulo
-                 or self.gera_retangulo().colliderect(lista_retangulo[1]) :
-                    objeto.colisao()
-            else: 
-                if self.gera_retangulo().colliderect(lista_retangulo):
-                    objeto.colisao()'''

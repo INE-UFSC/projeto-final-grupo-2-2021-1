@@ -1,13 +1,12 @@
 # Item com efeito de diminuir o tamanho do personagem 
-from contador import Contador
 from item import Item
-from constantes import Constante as const
+from constantes import Constante 
 
 class ItemTamanho(Item):
     def __init__(self, tela_jogo):
         super().__init__(tela_jogo)
         self.cor = (255, 255, 0)
-        self.tempo_efeito = const.tempo_pequeno
+        self.tempo_efeito = self.const.tempo_pequeno
     
     def efeito(self, personagem):
         self.__personagem = personagem

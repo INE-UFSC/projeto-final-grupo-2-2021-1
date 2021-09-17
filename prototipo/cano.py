@@ -1,6 +1,6 @@
 import pygame
 import random
-from constantes import Constante as const
+from constantes import Constante
 
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
@@ -8,11 +8,12 @@ from constantes import Constante as const
 class Cano:
     def __init__(self, tela_jogo):
 
+        self.const = Constante
         self.tela_jogo = tela_jogo
-        self.largura_tela = const.tela_jogo_largura
-        self.altura_tela = const.tela_jogo_altura
-        self.__largura_cano = const.largura_cano
-        self.__x = const.tela_jogo_largura
+        self.largura_tela = self.const.tela_jogo_largura
+        self.altura_tela = self.const.tela_jogo_altura
+        self.__largura_cano = self.const.largura_cano
+        self.__x = self.const.tela_jogo_largura
         self.__y1 = 0
         self.__y2 = 0
         self.base_superior = 0 

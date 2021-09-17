@@ -1,14 +1,13 @@
 # Item com efeito de tornar o personagem imune a colisões com os canos
 # Ainda pode haver "game over", caso o personagem atinja o chão ou o topo da tela 
 
-from contador import Contador
 from item import Item
-from constantes import Constante as const
+from constantes import Constante
 
 class ItemInvencibilidade(Item):
     def __init__(self, tela_jogo):
         super().__init__(tela_jogo)
-        self.tempo_efeito = const.tempo_invencibilidade
+        self.tempo_efeito = self.const.tempo_invencibilidade
 
     def efeito(self, personagem):
         self.__personagem = personagem

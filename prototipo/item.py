@@ -3,7 +3,7 @@ import pygame
 import random
 from personagem import Personagem
 from contador import Contador
-from constantes import Constante as const
+from constantes import Constante
 
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
@@ -11,13 +11,14 @@ from constantes import Constante as const
 class Item(ABC):
     def __init__(self, tela_jogo):
 
+        self.const = Constante()
         self.tela_jogo = tela_jogo
-        self.largura_cano = const.largura_cano
-        self.largura_tela = const.tela_jogo_largura
-        self.altura_tela = const.tela_jogo_altura
-        self.largura_item = const.largura_item
-        self.distancia_do_cano = const.distancia_item_cano
-        self.posicao_gera_cano = const.posicao_gera_cano      
+        self.largura_cano = self.const.largura_cano
+        self.largura_tela = self.const.tela_jogo_largura
+        self.altura_tela = self.const.tela_jogo_altura
+        self.largura_item = self.const.largura_item
+        self.distancia_do_cano = self.const.distancia_item_cano
+        self.posicao_gera_cano = self.const.posicao_gera_cano      
         self.criado = False
         self.colidiu = False
         self.ativo = False
@@ -72,7 +73,7 @@ class Item(ABC):
     
     def efeito_colisao(self, personagem):
         self.efeito(personagem)
-        self.timer = 1
+
 
     @abstractmethod
     def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses

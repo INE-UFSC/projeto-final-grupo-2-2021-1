@@ -16,20 +16,20 @@ from cenario import Cenario
 from itemInvencibilidade import ItemInvencibilidade
 from itemTamanho import ItemTamanho
 from contador import Contador
-from constantes import Constante as const
+from constantes import Constante
 from pontuacao import Pontuacao
 from colisão import Colisao
 
 class Controlador:
     def __init__(self) -> None:
-        self.__personagem = Personagem(const.posicao_personagem_x, const.posicao_personagem_y)
+        self.const = Constante()
+        self.__personagem = Personagem(self.const.posicao_personagem_x, self.const.posicao_personagem_y)
         self.__cenario = Cenario()
         self.__contador = Contador()
         self.__lista_objetos = []
         self.__itens_ativos = []
         self.__pontuacao = Pontuacao()
         self.__colisao = Colisao()
-
     @property
     def cenario(self):
         return self.__cenario
@@ -42,7 +42,7 @@ class Controlador:
         self.rodando = True
         while self.rodando:
 
-            clock.tick(const.fps)
+            clock.tick(self.const.fps)
             self.__cenario.inicializa_tela()
             self.__contador.contador_tempo()
             self.gera_objetos()
@@ -75,12 +75,12 @@ class Controlador:
             self.__lista_objetos.append(Cano(self.__cenario.tela))
 
         for objeto in self.__lista_objetos:
-            if objeto.x == const.posicao_gera_cano:
+            if objeto.x == self.const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
                     self.__lista_objetos.append(Cano(self.__cenario.tela))
                     self.instancia_itens()
 
-            if objeto.x <= const.posicao_destruir:
+            if objeto.x <= self.const.posicao_destruir:
                 self.__lista_objetos.remove(objeto)
                 del objeto
              
@@ -111,8 +111,15 @@ class Controlador:
     def colisao(self):
         for objeto in self.__lista_objetos:
             self.__colisao.detectar_colisão(self.__personagem, objeto)
-    
 
+    def pontuacao(self):
+
+        for cano in self.__lista_objetos:
+            if cano.x == self.const.posicao_pontuar:
+                if isinstance(cano, Cano):
+                    self.__pontuacao.marca_ponto(1)
+
+        self.__pontuacao.mostra_ponto(self.game_over)
 
     def le_eventos(self):
         for evento in pygame.event.get():
