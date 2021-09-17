@@ -1,10 +1,11 @@
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from controlador import Controlador
-from constantes import Constante as const
+from constantes import Constante
 import pygame, sys
 
 class Menu:
     def __init__(self, jogo:Controlador):
+        self.const = Constante()
         self.jogo = jogo
         self.__fonte = pygame.font.get_default_font()
         self.click = False
@@ -58,7 +59,7 @@ class Menu:
                         self.click = True
 
             pygame.display.update()
-            self.mainclock.tick(const.fps)
+            self.mainclock.tick(self.const.fps)
 
     def highscore(self):
 
@@ -86,7 +87,7 @@ class Menu:
                         self.click = True
 
             pygame.display.update()
-            self.mainclock.tick(const.fps)
+            self.mainclock.tick(self.const.fps)
 
     def como_jogar(self):
 
@@ -114,4 +115,4 @@ class Menu:
                         self.click = True
 
             pygame.display.update()
-            self.mainclock.tick(const.fps)
+            self.mainclock.tick(self.const.fps)

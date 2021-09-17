@@ -35,6 +35,10 @@ class Controlador:
     def cenario(self):
         return self.__cenario
 
+    @property
+    def personagem(self):
+        return self.__personagem
+
     def iniciar(self):
 
         pygame.init()
