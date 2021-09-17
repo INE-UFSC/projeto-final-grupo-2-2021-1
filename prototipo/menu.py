@@ -3,6 +3,7 @@ from controlador import Controlador
 from constantes import Constante
 import pygame, sys
 
+
 class Menu:
     def __init__(self, jogo:Controlador):
         self.const = Constante()
@@ -31,8 +32,17 @@ class Menu:
                 if event.button == 1:
                     self.click = True
 
+    def atualizatela(self):
+            pygame.display.update()
+            self.mainclock.tick(self.const.fps)
+
     def resetaclick(self):
         self.click = False
+    
+    def desenhabotao(self, x, y, tamanhox, tamanhoy, cor):
+        botao = pygame.Rect(x, y, tamanhox, tamanhoy)
+        pygame.draw.rect(self.jogo.cenario.tela, cor, botao)
+        return botao
 
     def menu(self):          
         pygame.init()
@@ -41,12 +51,9 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('main menu', 20, 60, 20)
 
-            botao1 = pygame.Rect(240,250,300,75)
-            botao2 = pygame.Rect(240,350,300,75)
-            botao3 = pygame.Rect(240,450,300,75)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,0,0), botao1)
-            pygame.draw.rect(self.jogo.cenario.tela, (0,255,0), botao2)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,0,255), botao3)
+            botao1 = self.desenhabotao(240,250,300,75, (255,0,0))
+            botao2 = self.desenhabotao(240,350,300,75, (0,255,0))
+            botao3 = self.desenhabotao(240,450,300,75, (255,255,0))
 
             if botao1.collidepoint((pygame.mouse.get_pos())):
                 if self.click:
@@ -60,9 +67,7 @@ class Menu:
 
             self.resetaclick()
             self.eventos_menu()
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.atualizatela()
 
     def highscore(self):
 
@@ -70,8 +75,7 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('Highscore', 20, 60, 20)
 
-            botao4 = pygame.Rect(20,575,100,50)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,255,0), botao4)
+            botao4 = self.desenhabotao(20,575,100,50, (255,255,0))
 
             if botao4.collidepoint((pygame.mouse.get_pos())):
                 if self.click:
@@ -79,9 +83,7 @@ class Menu:
             
             self.resetaclick()
             self.eventos_menu()
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.atualizatela()
 
     def como_jogar(self):
 
@@ -89,18 +91,15 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('Como jogar', 20, 60, 20)
 
-            botao5 = pygame.Rect(20,575,100,50)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,0,0), botao5)
+            botao4 = self.desenhabotao(20,575,100,50, (255,255,0))
 
-            if botao5.collidepoint((pygame.mouse.get_pos())):
+            if botao4.collidepoint((pygame.mouse.get_pos())):
                 if self.click:
                     break
             
             self.resetaclick()
             self.eventos_menu()
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.atualizatela()
 
     def gameover(self):
 
@@ -117,6 +116,4 @@ class Menu:
             
             self.resetaclick()
             self.eventos_menu()
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.atualizatela()
