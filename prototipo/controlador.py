@@ -13,8 +13,7 @@ from pygame.locals import *
 from personagem import Personagem
 from cano import Cano
 from cenario import Cenario
-from itemInvencibilidade import ItemInvencibilidade
-from itemTamanho import ItemTamanho
+from geradorItem import GeradorItemInvencibilidade, GeradorItemTamanho
 from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
@@ -51,7 +50,7 @@ class Controlador:
             self.__cenario.inicializa_tela()
             self.__contador.contador_tempo()
             self.gera_objetos()
-            self.colisao()
+            self.detecta_colisao()
             self.itens_ativos()
             self.atualiza_personagem()
             self.pontuacao()
@@ -90,14 +89,15 @@ class Controlador:
                 self.__lista_objetos.remove(objeto)
                 del objeto
              
-    def instancia_itens(self):
-        self.__item_1 = ItemTamanho(self.__cenario.tela)
-        self.__item_2 = ItemInvencibilidade(self.__cenario.tela)
+    def instancia_itens(self): #FACTORY
+        itens = []
 
-        lista_itens = [self.__item_1, self.__item_2]
-        item = random.choice(lista_itens)
+        itens.append(GeradorItemTamanho(self.__cenario).criador_item())
+        itens.append(GeradorItemInvencibilidade(self.__cenario).criador_item())
 
-        if random.randint(1,4) == 1:
+        item = random.choice(itens)
+
+        if random.randint(1,2) == 1:
             self.__lista_objetos.append(item)
 
     def itens_ativos(self):
@@ -114,7 +114,7 @@ class Controlador:
                    self.__itens_ativos.remove(item)
                    del item
 
-    def colisao(self):
+    def detecta_colisao(self):
         for objeto in self.__lista_objetos:
             self.__colisao.detectar_colisão(self.__personagem, objeto)
 

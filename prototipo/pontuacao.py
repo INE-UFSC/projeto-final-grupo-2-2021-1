@@ -7,7 +7,7 @@ class Pontuacao(Singleton):
     def __init__(self) -> None:
         self.__pontos = 0
         pygame.font.init()
-        self.__fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        self.__fonte = pygame.font.SysFont('Comic Sans MS', 60)
 
     def marca_ponto(self, valor_ponto):
         self.__pontos += valor_ponto
