@@ -3,24 +3,22 @@ from itemInvencibilidade import ItemInvencibilidade
 from itemTamanho import ItemTamanho
 
 
-# Factory MazeGame que criar jogos do tipo labirinto com salas (produtos) distintas
+# Factory GeradorItem
 class GeradorItem(ABC):
-    def __init__(self, cenario) -> None:
-        self.cenario = cenario
+    def __init__(self) -> None:
+        pass
 
-    # Factory method make_room será especializado para cada tipo de sala
+    # Factory method criador_item será especializado para cada tipo de item
     @abstractmethod
     def criador_item(self):
         raise NotImplementedError("Você deve implementar isso!")
 
-# classe derivada 1 - escializa make_room criando uma sala mágica
+# classe derivada 1 - especializa criador_item criando um item de tamanho
 class GeradorItemTamanho(GeradorItem):
-    
     def criador_item(self):
-        return ItemTamanho(self.cenario.tela)
+        return ItemTamanho()
 
-# classe derivada 2
+# classe derivada 2 - especializa criador_item criando um item de invencibilidade
 class GeradorItemInvencibilidade(GeradorItem):
-
     def criador_item(self):
-        return ItemInvencibilidade(self.cenario.tela)
+        return ItemInvencibilidade()

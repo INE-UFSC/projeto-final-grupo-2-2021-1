@@ -6,10 +6,8 @@ from constantes import Constante
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
 
 class Cano:
-    def __init__(self, tela_jogo):
-
+    def __init__(self):
         self.const = Constante()
-        self.tela_jogo = tela_jogo
         self.__x = self.const.tela_jogo_largura
         self.__y1 = 0
         self.__y2 = 0
@@ -22,10 +20,10 @@ class Cano:
     def x(self):
         return self.__x
 
-    def atualiza(self):
+    def atualiza(self, tela_jogo):
         if not self.tamanho_cano_definido:
             self.tamanho_cano()
-        self.desenha_objeto()
+        self.desenha_objeto(tela_jogo)
 
     def tamanho_cano(self): #Altera o tamnho do cano
 
@@ -41,14 +39,14 @@ class Cano:
         retangulo2 = pygame.Rect(self.__x, self.__y2, self.const.largura_cano, self.base_inferior)
         return [retangulo1, retangulo2]
 
-    def desenha_objeto(self): #Desenha o cano na tela do jogo
+    def desenha_objeto(self, tela_jogo): #Desenha o cano na tela do jogo
         retangulos = self.gera_retangulo()
 
         self.__y2 = self.bases[1]  
         self.base_superior = self.bases[0]
         self.base_inferior = self.const.tela_jogo_altura - self.bases[1] 
-        pygame.draw.rect(self.tela_jogo, (0, 255, 0), retangulos[0])
-        pygame.draw.rect(self.tela_jogo, (0, 255, 0), retangulos[1])
+        pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[0])
+        pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[1])
 
     def efeito_colisao(self, personagem):
         if not personagem.invencivel:

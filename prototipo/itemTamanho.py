@@ -2,9 +2,10 @@
 from item import Item
 from constantes import Constante 
 
+
 class ItemTamanho(Item):
-    def __init__(self, tela_jogo):
-        super().__init__(tela_jogo)
+    def __init__(self):
+        super().__init__()
         self.cor = (255, 255, 0)
         self.tempo_efeito = self.const.tempo_pequeno
     

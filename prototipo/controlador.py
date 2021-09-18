@@ -1,11 +1,3 @@
-# Controlador ainda não está operando corretamente
-# Necessário arrumar ainda: 
-# 1. Colisão do personagem com os canos
-# 2. Geração dos itens (ainda não foi implementada a lógica para desenhá-los na tela)
-# 3. Geração dos canos (no momento gera somente o conjunto dos 3 primeiros canos)
-# 4. Lógica para contabilizar a pontuação
-
-
 from item import Item
 import random
 import pygame
@@ -18,6 +10,7 @@ from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
 from colisão import Colisao
+
 
 class Controlador:
     def __init__(self) -> None:
@@ -71,18 +64,18 @@ class Controlador:
         self.controla_objetos()
 
         for objeto in self.__lista_objetos:
-            objeto.atualiza()
+            objeto.atualiza(self.__cenario.tela)
             if self.__personagem.voando and not self.__personagem.game_over:
                 objeto.move()
 
     def controla_objetos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
-            self.__lista_objetos.append(Cano(self.__cenario.tela))
+            self.__lista_objetos.append(Cano())
 
         for objeto in self.__lista_objetos:
             if objeto.x == self.const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
-                    self.__lista_objetos.append(Cano(self.__cenario.tela))
+                    self.__lista_objetos.append(Cano())
                     self.instancia_itens()
 
             if objeto.x <= self.const.posicao_destruir:
@@ -92,8 +85,8 @@ class Controlador:
     def instancia_itens(self): #FACTORY
         itens = []
 
-        itens.append(GeradorItemTamanho(self.__cenario).criador_item())
-        itens.append(GeradorItemInvencibilidade(self.__cenario).criador_item())
+        itens.append(GeradorItemTamanho().criador_item())
+        itens.append(GeradorItemInvencibilidade().criador_item())
 
         item = random.choice(itens)
 

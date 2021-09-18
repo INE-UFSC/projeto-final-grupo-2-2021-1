@@ -4,9 +4,10 @@
 from item import Item
 from constantes import Constante
 
+
 class ItemInvencibilidade(Item):
-    def __init__(self, tela_jogo):
-        super().__init__(tela_jogo)
+    def __init__(self):
+        super().__init__()
         self.tempo_efeito = self.const.tempo_invencibilidade
 
     def efeito(self, personagem):
@@ -20,4 +21,3 @@ class ItemInvencibilidade(Item):
         self.__personagem.invencivel = False
         self.__personagem.cor = (255, 0, 0)
         self.ativo = False
-

@@ -9,17 +9,14 @@ from constantes import Constante
 # Temos que pensar como fazer os sistema de tamanho e posição aleatória
 
 class Item(ABC):
-    def __init__(self, tela_jogo):
-
+    def __init__(self):
         self.const = Constante()
-        self.tela_jogo = tela_jogo
         self.itens = []  
         self.criado = False
         self.colidiu = False
         self.ativo = False
         self.__x = 0
         self.__y = 0
-
         self.__timer = None
         self.cor = (160, 160, 160)
 
@@ -35,10 +32,10 @@ class Item(ABC):
     def timer(self, tempo):
         self.__timer = tempo
 
-    def atualiza(self): #Faz todo o processo de gerar o item, aplicar o movimento e destruir
+    def atualiza(self, tela_jogo): #Faz todo o processo de gerar o item, aplicar o movimento e destruir
         if not self.criado:
             self.define_posicao_tela()
-        self.desenha_objeto()
+        self.desenha_objeto(tela_jogo)
 
     def define_posicao_tela(self): #Sorteia uma posicão que o item vai ficar na tela
 
@@ -59,10 +56,10 @@ class Item(ABC):
 
         return [retangulo]
 
-    def desenha_objeto(self): #Desenha o item na tela do jogo
+    def desenha_objeto(self, tela_jogo): #Desenha o item na tela do jogo
         lista_retangulo = self.gera_retangulo()
 
-        pygame.draw.rect(self.tela_jogo, self.cor, lista_retangulo[0])
+        pygame.draw.rect(tela_jogo, self.cor, lista_retangulo[0])
 
     def move(self):
         self.__x += -5
