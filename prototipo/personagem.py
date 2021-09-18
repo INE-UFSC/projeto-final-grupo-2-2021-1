@@ -4,17 +4,19 @@
 from typing import List
 from cano import Cano
 import pygame
+from constantes import Constante
 
 
 class Personagem:
     def __init__(self, x, y):
+        self.const = Constante()
         self.__x = x
         self.__y = y
         self.velocidade = 0
         self.__tecla_pressionada = False
         self.voando = False
         self.game_over = False
-        self.tamanho = 35
+        self.tamanho = self.const.tamanho_personagem
         self.invencivel = False
         self.cor = (255, 0, 0)
     
@@ -43,7 +45,7 @@ class Personagem:
             self.velocidade += 0.5   # medida que o personagem desce a cada loop
             if self.velocidade > 8:   # evita que o personagem caia muito rapidamente
                 self.velocidade = 8
-            if self.__y < 600:  # se o personagem não estiver no chão, atualiza sua posição
+            if self.__y + self.tamanho <= self.const.tela_jogo_altura:  # se o personagem não estiver no chão, atualiza sua posição
                 self.__y += int(self.velocidade)
 
         # controle do pulo do personagem
@@ -59,7 +61,7 @@ class Personagem:
     
     def morreu(self):
         # checa se o personagem atingiu o chão
-        if self.__y > 600:
+        if self.__y + self.tamanho >= self.const.tela_jogo_altura:
             self.game_over = True
             self.voando = False
         # checa se o personagem saiu da tela

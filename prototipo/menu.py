@@ -3,6 +3,7 @@ from controlador import Controlador
 from constantes import Constante
 import pygame, sys
 
+
 class Menu:
     def __init__(self, jogo:Controlador):
         self.const = Constante()
@@ -18,6 +19,36 @@ class Menu:
         self.jogo.cenario.tela.blit(superficie, texto_rect)
         self.mainclock = pygame.time.Clock()
 
+    def eventos_menu(self):
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
+
+    def atualizatela(self):
+            pygame.display.update()
+            self.mainclock.tick(self.const.fps)
+
+    def resetaclick(self):
+        self.click = False
+    
+    def botao(self, x, y, tamanhox, tamanhoy):
+        acao = False
+        botao = pygame.Rect(x, y, tamanhox, tamanhoy)
+        pygame.draw.rect(self.jogo.cenario.tela, (255,0,0), botao)
+        
+        if botao.collidepoint(pygame.mouse.get_pos()):
+            if self.click:
+                acao = True
+        return acao
+
     def menu(self):          
         pygame.init()
         while True:
@@ -25,41 +56,16 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('main menu', 20, 60, 20)
 
-            mx, my = pygame.mouse.get_pos()
-            botao1 = pygame.Rect(240,250,300,75)
-            botao2 = pygame.Rect(240,350,300,75)
-            botao3 = pygame.Rect(240,450,300,75)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,0,0), botao1)
-            pygame.draw.rect(self.jogo.cenario.tela, (0,255,0), botao2)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,0,255), botao3)
+            if self.botao(240,250,300,75):
+                self.jogo.iniciar()
+            if self.botao(240,350,300,75):
+                self.highscore()
+            if self.botao(240,450,300,75):
+                self.como_jogar()
 
-            if botao1.collidepoint((mx,my)):
-                if self.click:
-                    self.jogo.iniciar()
-            if botao2.collidepoint((mx,my)):
-                if self.click:
-                    self.highscore()
-            if botao3.collidepoint((mx,my)):
-                if self.click:
-                    self.como_jogar()
-
-            self.click = False
-
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit
-
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        pygame.quit()
-                        sys.exit
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.resetaclick()
+            self.eventos_menu()
+            self.atualizatela()
 
     def highscore(self):
 
@@ -67,27 +73,12 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('Highscore', 20, 60, 20)
 
-            botao4 = pygame.Rect(20,575,100,50)
-            pygame.draw.rect(self.jogo.cenario.tela, (255,255,0), botao4)
+            if self.botao(20,575,100,50):
+                break
             
-            mx, my = pygame.mouse.get_pos()
-
-            if botao4.collidepoint((mx,my)):
-                if self.click:
-                    break
-            
-            self.click = False
-
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.resetaclick()
+            self.eventos_menu()
+            self.atualizatela()
 
     def como_jogar(self):
 
@@ -95,24 +86,26 @@ class Menu:
             self.jogo.cenario.inicializa_tela()
             self.desenha_texto('Como jogar', 20, 60, 20)
 
+            if self.botao(20,575,100,50):
+                break
+            
+            self.resetaclick()
+            self.eventos_menu()
+            self.atualizatela()
+
+    def gameover(self):
+
+        while True:
+            self.jogo.cenario.inicializa_tela()
+            self.desenha_texto('Game over', 20, 60, 20)
+
             botao5 = pygame.Rect(20,575,100,50)
             pygame.draw.rect(self.jogo.cenario.tela, (255,0,0), botao5)
-            
-            mx, my = pygame.mouse.get_pos()
 
-            if botao5.collidepoint((mx,my)):
+            if botao5.collidepoint((pygame.mouse.get_pos())):
                 if self.click:
                     break
             
-            self.click = False
-
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
-
-            pygame.display.update()
-            self.mainclock.tick(self.const.fps)
+            self.resetaclick()
+            self.eventos_menu()
+            self.atualizatela()

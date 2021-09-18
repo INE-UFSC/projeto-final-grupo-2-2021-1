@@ -12,6 +12,7 @@ class Constante(Singleton):
         self.posicao_pontuar = 120
         self.posicao_personagem_x = 160
         self.posicao_personagem_y = 300
+        self.tamanho_personagem = 35
         self.fps = 60
         self.tempo_invencibilidade = 5
         self.tempo_pequeno = 7
