@@ -7,6 +7,10 @@ class Contador:
         self.__tempo_contado = 0
         self.__tempo_fim = -1
 
+    @property
+    def tempo_contado(self):
+        return self.__tempo_contado
+
     def contador_tempo(self):
         tempo = pygame.time.get_ticks()/1000
         if tempo >= self.__auxiliar:

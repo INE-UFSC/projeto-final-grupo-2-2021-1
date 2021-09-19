@@ -102,10 +102,10 @@ class Controlador:
         
         if len(self.__itens_ativos) != 0:
             for item in self.__itens_ativos:
-               self.__contador.duracao_item(item)
-               if item.ativo == False:
-                   self.__itens_ativos.remove(item)
-                   del item
+                item.duracao_item(self.__contador)
+                if item.ativo == False:
+                    self.__itens_ativos.remove(item)
+                    del item
 
     def detecta_colisao(self):
         for objeto in self.__lista_objetos:

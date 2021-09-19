@@ -18,3 +18,6 @@ class ItemTamanho(Item):
     def reverter(self):
         self.__personagem.tamanho = 35
         self.ativo = False
+
+    def tempo_item(self):
+        return self.tempo_efeito

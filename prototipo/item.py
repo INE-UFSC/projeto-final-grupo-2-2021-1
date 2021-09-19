@@ -15,6 +15,7 @@ class Item(ABC):
         self.criado = False
         self.colidiu = False
         self.ativo = False
+        self.final_efeito = 0
         self.__x = 0
         self.__y = 0
         self.__timer = None
@@ -67,6 +68,21 @@ class Item(ABC):
     def efeito_colisao(self, personagem):
         self.efeito(personagem)
 
+    def tempo(self, tempo_atual):
+        self.final_efeito = tempo_atual + self.tempo_item()
+
+    def duracao_item(self, contador):
+        
+        if self.colidiu == True:
+            self.tempo(int(contador.tempo_contado))
+            self.colidiu = False
+
+        if self.final_efeito == contador.tempo_contado:
+            self.reverter()
+
+    @abstractmethod
+    def tempo_item(self): #Retornar o tempo de duração do efeito do item
+        pass 
 
     @abstractmethod
     def efeito(self, personagem):  # aplica o efeito do item, método a ser especializado nas subclasses
@@ -75,3 +91,5 @@ class Item(ABC):
     @abstractmethod
     def reverter(self):  # reverte o efeito do item
         pass
+
+

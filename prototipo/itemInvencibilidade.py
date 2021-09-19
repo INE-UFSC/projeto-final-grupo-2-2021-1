@@ -21,3 +21,6 @@ class ItemInvencibilidade(Item):
         self.__personagem.invencivel = False
         self.__personagem.cor = (255, 0, 0)
         self.ativo = False
+
+    def tempo_item(self):
+        return self.tempo_efeito
