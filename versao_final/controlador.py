@@ -30,6 +30,10 @@ class Controlador:
     @property
     def personagem(self):
         return self.__personagem
+    
+    @property
+    def contador(self):
+        return self.__contador
 
     def iniciar(self):
 
@@ -50,9 +54,6 @@ class Controlador:
 
             self.le_eventos()
             pygame.display.update()
-        
-        pygame.quit()
-
 
     def atualiza_personagem(self):
         self.__personagem.desenha_personagem(self.__cenario.tela)
