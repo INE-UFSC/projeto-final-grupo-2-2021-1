@@ -4,5 +4,5 @@ from controlador import Controlador
 from menu import Menu
 
 
-control = Menu(Controlador())
+control = Menu()
 control.menu()
