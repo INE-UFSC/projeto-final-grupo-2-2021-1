@@ -5,7 +5,7 @@ from pygame.locals import *
 from personagem import Personagem
 from cano import Cano
 from cenario import Cenario
-from geradorItem import GeradorItem, GeradorItemInvencibilidade, GeradorItemTamanho
+from geradorItem import GeradorItem
 from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
@@ -76,7 +76,8 @@ class Controlador:
             if objeto.x == self.const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
                     self.__lista_objetos.append(Cano())
-                    self.instancia_itens()
+                    if random.randint(1,2) == 1:
+                        self.instancia_itens()
 
             if objeto.x <= self.const.posicao_destruir:
                 self.__lista_objetos.remove(objeto)
@@ -86,9 +87,7 @@ class Controlador:
         geradores_de_itens = GeradorItem.__subclasses__()
         gerador_selecionado = random.choice(geradores_de_itens)
         item = gerador_selecionado().criador_item()
-
-        if random.randint(1,2) == 1:
-            self.__lista_objetos.append(item)
+        self.__lista_objetos.append(item)
 
 
     def itens_ativos(self):
