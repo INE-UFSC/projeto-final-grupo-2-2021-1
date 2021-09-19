@@ -97,6 +97,9 @@ class Controlador:
 
         for item in self.__lista_objetos:
             if item.colidiu and isinstance(item, Item):
+                for item_ativo in self.__itens_ativos:
+                    if type(item_ativo) is type(item):
+                        self.__itens_ativos.remove(item_ativo)
                 self.__itens_ativos.append(item)
                 self.__lista_objetos.remove(item)
         
