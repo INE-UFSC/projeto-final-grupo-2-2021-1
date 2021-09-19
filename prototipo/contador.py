@@ -16,19 +16,3 @@ class Contador:
         if tempo >= self.__auxiliar:
             self.__tempo_contado = self.__auxiliar
             self.__auxiliar += 1
-  
-    def inicia_contagem(self, tempo_para_contar):
-        self.__terminou = False
-        self.__tempo_fim = self.__tempo_contado + tempo_para_contar
-
-    def fim_contagem(self):
-        if self.__tempo_fim == self.__tempo_contado:
-            self.__terminou = True
-        return self.__terminou
-    
-    def duracao_item(self, item):
-        if item.colidiu:
-            self.inicia_contagem(item.tempo_efeito)
-            item.colidiu = False
-        if self.fim_contagem() == True:
-            item.reverter()
