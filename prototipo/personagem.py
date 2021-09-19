@@ -1,18 +1,22 @@
 # Aqui a gente vai construir a classe do nosso personagem
 # A ideia posteriormente é especializar essa classe, tendo vários personagens com características diferentes
 
+from typing import List
+from cano import Cano
 import pygame
+from constantes import Constante
 
 
 class Personagem:
     def __init__(self, x, y):
+        self.const = Constante()
         self.__x = x
         self.__y = y
         self.velocidade = 0
         self.__tecla_pressionada = False
         self.voando = False
         self.game_over = False
-        self.tamanho = 35
+        self.tamanho = self.const.tamanho_personagem
         self.invencivel = False
         self.cor = (255, 0, 0)
     
@@ -41,7 +45,7 @@ class Personagem:
             self.velocidade += 0.5   # medida que o personagem desce a cada loop
             if self.velocidade > 8:   # evita que o personagem caia muito rapidamente
                 self.velocidade = 8
-            if self.__y < 600:  # se o personagem não estiver no chão, atualiza sua posição
+            if self.__y + self.tamanho <= self.const.tela_jogo_altura:  # se o personagem não estiver no chão, atualiza sua posição
                 self.__y += int(self.velocidade)
 
         # controle do pulo do personagem
@@ -53,30 +57,14 @@ class Personagem:
             
             if not teclas[pygame.K_UP]:
                 self.__tecla_pressionada = False
-        
-        self.morreu()
+
     
     def morreu(self):
         # checa se o personagem atingiu o chão
-        if self.__y > 600:
+        if self.__y + self.tamanho >= self.const.tela_jogo_altura:
             self.game_over = True
             self.voando = False
         # checa se o personagem saiu da tela
         elif self.__y <= 0:
             self.game_over = True
     
-    def colisao(self, canos):
-        # checha se o personagem colidiu com os canos
-        if self.voando and not self.game_over and not self.invencivel:
-            if self.gera_retangulo().colliderect(canos[0]) or self.gera_retangulo().colliderect(canos[1]):
-                self.game_over = True
-
-    def pegou_item(self, item):
-        # confere se o item foi coletado
-        # ainda é preciso implementar a lógica para que ele desapareça da tela quando isso acontecer
-        if not self.game_over:
-            if self.gera_retangulo().colliderect(item.gera_retangulo()):
-                item.efeito()  # aplica o efeito do item respectivo
-                item.coletado = True
-                item.timer = 1 
-
