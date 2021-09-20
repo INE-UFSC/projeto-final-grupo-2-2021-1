@@ -32,7 +32,7 @@ class Animacao(pygame.sprite.Sprite, ABC):
 class PersonagemAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/personagem/'])
-        self.__rect = self.image.get_rect()
+        self.__rect = self.image.get_rect(center=(self.const.posicao_personagem_x, self.const.posicao_personagem_y))
         self.inicio_posicao = True
 
     @property
@@ -43,12 +43,12 @@ class PersonagemAnimacao(Animacao):
     def rect(self, rect):
         self.__rect = rect
 
-    def update(self):
+    def update(self, x, y):
         self.sprite_atual = self.sprite_atual + 0.05
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
         self.image = pygame.transform.scale(self.image, (int(716/10), int(632/10)))
-        self.__rect = self.image.get_rect()
+        self.__rect = self.image.get_rect(center=(x, y))
 
 

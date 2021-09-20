@@ -10,6 +10,7 @@ from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
 from colisão import Colisao
+from canoPadrao import CanoPadrao
 
 
 class Controlador:
@@ -71,12 +72,12 @@ class Controlador:
 
     def controla_objetos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
-            self.__lista_objetos.append(Cano())
+            self.__lista_objetos.append(CanoPadrao())
 
         for objeto in self.__lista_objetos:
             if objeto.x == self.const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
-                    self.__lista_objetos.append(Cano())
+                    self.__lista_objetos.append(CanoPadrao())
                     self.instancia_itens()
 
             if objeto.x <= self.const.posicao_destruir:

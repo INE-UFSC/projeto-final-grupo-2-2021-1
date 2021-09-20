@@ -26,6 +26,10 @@ class Personagem(ABC):
     @property
     def tecla_pressionada(self):
         return self.__tecla_pressionada
+    
+    @y.setter
+    def y(self, y):
+        self.__y = y
 
     @tecla_pressionada.setter
     def tecla_pressionada(self, tecla_precionada):
@@ -39,10 +43,13 @@ class Personagem(ABC):
         lista = [self.__x, self.__y]
         self.__animacao.sprites()[0].rect.topleft = lista
 
+        retangulo = pygame.Rect(self.__x, self.__y, self.tamanho, self.tamanho)
+        return retangulo
+
 
     def desenha_personagem(self, tela):
         self.gera_retangulo()
-        self.__animacao.update()
+        self.__animacao.update(self.__x, self.__y)
         self.__animacao.draw(tela)
 
     @abstractmethod
