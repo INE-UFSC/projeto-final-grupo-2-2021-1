@@ -11,6 +11,7 @@ from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
 from colisão import Colisao
+from canoPadrao import CanoPadrao
 
 
 class Controlador:
