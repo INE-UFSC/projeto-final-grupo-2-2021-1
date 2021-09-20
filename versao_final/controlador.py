@@ -2,7 +2,7 @@ from item import Item
 import random
 import pygame
 from pygame.locals import *
-from personagem import Personagem
+from jogador import Jogador
 from cano import Cano
 from cenario import Cenario
 from geradorItem import GeradorItem, GeradorItemInvencibilidade, GeradorItemTamanho
@@ -15,7 +15,7 @@ from colisão import Colisao
 class Controlador:
     def __init__(self) -> None:
         self.const = Constante()
-        self.__personagem = Personagem(self.const.posicao_personagem_x, self.const.posicao_personagem_y)
+        self.__personagem = Jogador(self.const.posicao_personagem_x, self.const.posicao_personagem_y)
         self.__cenario = Cenario()
         self.__contador = Contador()
         self.__lista_objetos = []

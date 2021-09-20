@@ -2,23 +2,18 @@
 # A ideia posteriormente é especializar essa classe, tendo vários personagens com características diferentes
 
 from typing import List
-from cano import Cano
 import pygame
 from constantes import Constante
+from abc import ABC, abstractmethod
+from animacao import PersonagemAnimacao
 
-
-class Personagem:
+class Personagem(ABC):
     def __init__(self, x, y):
         self.const = Constante()
+        self.__animacao = pygame.sprite.Group(PersonagemAnimacao())
         self.__x = x
         self.__y = y
-        self.velocidade = 0
-        self.__tecla_pressionada = False
-        self.voando = False
-        self.game_over = False
-        self.tamanho = self.const.tamanho_personagem
-        self.invencivel = False
-        self.cor = (255, 0, 0)
+        self.__tecla_pressionada = False 
     
     @property
     def x(self):
@@ -32,39 +27,29 @@ class Personagem:
     def tecla_pressionada(self):
         return self.__tecla_pressionada
 
+    @tecla_pressionada.setter
+    def tecla_pressionada(self, tecla_precionada):
+        self.__tecla_pressionada = tecla_precionada
+
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
-        retangulo = pygame.Rect(self.__x, self.__y, self.tamanho, self.tamanho)
-        return retangulo
+        b=0
+        for a in self.__animacao.sprites()[0].rect.topleft:
+            b += 1
+            print(b) 
+        lista = [self.__x, self.__y]
+        self.__animacao.sprites()[0].rect.topleft = lista
+
 
     def desenha_personagem(self, tela):
-        pygame.draw.rect(tela, self.cor, self.gera_retangulo())
+        self.gera_retangulo()
+        self.__animacao.update()
+        self.__animacao.draw(tela)
 
+    @abstractmethod
     def mover(self):
-        # confere se o personagem está voando para aplicar a gravidade sobre ele
-        if self.voando:
-            self.velocidade += 0.5   # medida que o personagem desce a cada loop
-            if self.velocidade > 8:   # evita que o personagem caia muito rapidamente
-                self.velocidade = 8
-            if self.__y + self.tamanho <= self.const.tela_jogo_altura:  # se o personagem não estiver no chão, atualiza sua posição
-                self.__y += int(self.velocidade)
+        pass
 
-        # controle do pulo do personagem
-        if not self.game_over:
-            teclas = pygame.key.get_pressed()  # verifica quais teclas foram pressionadas
-            if teclas[pygame.K_UP] and self.__tecla_pressionada == False:
-                self.__tecla_pressionada = True
-                self.velocidade = -10
-            
-            if not teclas[pygame.K_UP]:
-                self.__tecla_pressionada = False
-
-    
+    @abstractmethod
     def morreu(self):
-        # checa se o personagem atingiu o chão
-        if self.__y + self.tamanho >= self.const.tela_jogo_altura:
-            self.game_over = True
-            self.voando = False
-        # checa se o personagem saiu da tela
-        elif self.__y <= 0:
-            self.game_over = True
+        pass
     
