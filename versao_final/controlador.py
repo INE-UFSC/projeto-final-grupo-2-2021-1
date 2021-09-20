@@ -3,6 +3,7 @@ import random
 import pygame
 from pygame.locals import *
 from jogador import Jogador
+from canoPadrao import CanoPadrao
 from cano import Cano
 from cenario import Cenario
 from geradorItem import GeradorItem, GeradorItemInvencibilidade, GeradorItemTamanho
@@ -55,6 +56,8 @@ class Controlador:
             self.le_eventos()
             pygame.display.update()
 
+        pygame.quit()
+
     def atualiza_personagem(self):
         self.__personagem.desenha_personagem(self.__cenario.tela)
         self.__personagem.mover()
@@ -71,12 +74,12 @@ class Controlador:
 
     def controla_objetos(self): #Controla os canos da lista de objetos que são gerados
         if not self.__lista_objetos:
-            self.__lista_objetos.append(Cano())
+            self.__lista_objetos.append(CanoPadrao())
 
         for objeto in self.__lista_objetos:
             if objeto.x == self.const.posicao_gera_cano:
                 if isinstance(objeto, Cano):
-                    self.__lista_objetos.append(Cano())
+                    self.__lista_objetos.append(CanoPadrao())
                     self.instancia_itens()
 
             if objeto.x <= self.const.posicao_destruir:
