@@ -13,7 +13,7 @@ class Personagem(ABC):
         self.__animacao = pygame.sprite.Group(PersonagemAnimacao())
         self.__x = x
         self.__y = y
-        self.__tecla_pressionada = False 
+        self.__tecla_pressionada = False
     
     @property
     def x(self):
@@ -36,19 +36,10 @@ class Personagem(ABC):
         self.__tecla_pressionada = tecla_precionada
 
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
-        b=0
-        for a in self.__animacao.sprites()[0].rect.topleft:
-            b += 1
-            print(b) 
-        lista = [self.__x, self.__y]
-        self.__animacao.sprites()[0].rect.topleft = lista
-
         retangulo = pygame.Rect(self.__x, self.__y, self.tamanho, self.tamanho)
         return retangulo
 
-
     def desenha_personagem(self, tela):
-        self.gera_retangulo()
         self.__animacao.update(self.__x, self.__y)
         self.__animacao.draw(tela)
 
