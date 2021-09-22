@@ -10,6 +10,12 @@ from controlador import Controlador
 class MenuController:
     def __init__(self):
        self.menuname = None
+       self.lastscore = None
+       self.main = MainMenu()
+       self.jogo = Controlador()
+       self.menuhighscore = MenuHighscore()
+       self.menucomojogar = MenuComoJogar()
+       self.menugameover = MenuGameOver(self.lastscore)
 
     def checamenu(self):
         if self.menuname == 'Main Menu':
@@ -24,31 +30,31 @@ class MenuController:
             self.gameover()
 
     def main_menu(self):
-        menu = MainMenu()
-        menu.menu()
-        self.menuname = menu.estado
+        self.main.menu()
+        self.menuname = self.main.estado
         self.checamenu()
 
     def game(self):
-        jogo = Controlador()
-        jogo.iniciar()
-        self.menuname = jogo.estado
+        self.jogo = Controlador()
+        self.jogo.iniciar()
+        self.lastscore = int(self.jogo.pontos.pontos)
+        self.menuname = self.jogo.estado
         self.checamenu()
 
     def highscore(self):
-        menu = MenuHighscore()
-        menu.menu()
-        self.menuname = menu.estado
+        self.menuhighscore = MenuHighscore()
+        self.menuhighscore.menu()
+        self.menuname = self.menuhighscore.estado
         self.checamenu()
 
     def comojogar(self):
-        menu = MenuComoJogar()
-        menu.menu()
-        self.menuname = menu.estado
+        self.menucomojogar.menu()
+        self.menuname = self.menucomojogar.estado
         self.checamenu()
 
     def gameover(self):
-        menu = MenuGameOver()
-        menu.menu()
-        self.menuname = menu.estado
+        self.menugameover = MenuGameOver(self.lastscore)
+        self.menugameover.menu()
+        self.menuname = self.menugameover.estado
+        self.rank = self.menugameover.checaponto.score
         self.checamenu()
