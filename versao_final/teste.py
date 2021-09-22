@@ -1,8 +1,8 @@
 # Arquivo temporário para testar o funcionamento do controlador
 
 from controlador import Controlador
-from menu import Menu
+from menucontroller import MenuController
 
 
-control = Menu()
-control.menu()
+control = MenuController()
+control.main_menu()
