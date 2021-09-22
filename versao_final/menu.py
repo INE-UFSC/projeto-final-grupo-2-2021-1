@@ -53,10 +53,7 @@ class Menu(ABC):
 
     @abstractmethod
     def desenha_botao(self, x, y, tamanhox, tamanhoy, estado):
-        if self.cria_botao(x, y, tamanhox, tamanhoy).collidepoint(pygame.mouse.get_pos()):
-            if self.click:
-                self.estado = estado
-                self.rodando = False
+        pass
     
     @abstractmethod
     def menu(self):          

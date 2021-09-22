@@ -48,7 +48,7 @@ class PersonagemAnimacao(Animacao):
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(716/10), int(632/10)))
+        self.image = pygame.transform.scale(self.image, (int(716/11), int(632/11)))
         self.__rect = self.image.get_rect(center=(x, y))
     
 class CanoSuperiorAnimacao(Animacao):
@@ -88,7 +88,7 @@ class CanoInferiorAnimacao(Animacao):
         self.__rect = rect
 
     def update(self, x, y):
-        self.sprite_atual = self.sprite_atual + 0.05
+        self.sprite_atual = self.sprite_atual + 0.10
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
@@ -114,7 +114,7 @@ class ItemInvencivelAnimacao(Animacao):
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(50), int(50)))
+        self.image = pygame.transform.scale(self.image, (int(50*1.3), int(50*1.3)))
         self.__rect = self.image.get_rect(center=(x, y))
 
 class ItemPequenoAnimacao(Animacao):
@@ -136,7 +136,7 @@ class ItemPequenoAnimacao(Animacao):
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(50), int(50)))
+        self.image = pygame.transform.scale(self.image, (int(50*1.3), int(50*1.3)))
         self.__rect = self.image.get_rect(center=(x, y))
 
 
