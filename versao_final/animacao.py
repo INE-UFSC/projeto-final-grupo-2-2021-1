@@ -95,4 +95,49 @@ class CanoInferiorAnimacao(Animacao):
         self.image = pygame.transform.scale(self.image, (int(388/8), int(5048/8)))
         self.__rect = self.image.get_rect(center=(x, y))
 
+class ItemInvencivelAnimacao(Animacao):
+    def __init__(self) -> None:
+        super().__init__(['versao_final/sprites/item/iteminvencibilidade/'])
+        self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
+        self.inicio_posicao = True
+
+    @property
+    def rect(self):
+        return self.__rect
+
+    @rect.setter
+    def rect(self, rect):
+        self.__rect = rect
+
+    def update(self, x, y):
+        self.sprite_atual = self.sprite_atual + 0.10
+        if self.sprite_atual >= len(self.sprites):
+            self.sprite_atual = 0
+        self.image = self.sprites[int(self.sprite_atual)]
+        self.image = pygame.transform.scale(self.image, (int(50), int(50)))
+        self.__rect = self.image.get_rect(center=(x, y))
+
+class ItemPequenoAnimacao(Animacao):
+    def __init__(self) -> None:
+        super().__init__(['versao_final/sprites/item/itempequeno/'])
+        self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
+        self.inicio_posicao = True
+
+    @property
+    def rect(self):
+        return self.__rect
+
+    @rect.setter
+    def rect(self, rect):
+        self.__rect = rect
+
+    def update(self, x, y):
+        self.sprite_atual = self.sprite_atual + 0.10
+        if self.sprite_atual >= len(self.sprites):
+            self.sprite_atual = 0
+        self.image = self.sprites[int(self.sprite_atual)]
+        self.image = pygame.transform.scale(self.image, (int(50), int(50)))
+        self.__rect = self.image.get_rect(center=(x, y))
+
+
 

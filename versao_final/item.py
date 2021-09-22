@@ -53,14 +53,13 @@ class Item(ABC):
         self.criado = True
 
     def gera_retangulo(self):    # gera o retângulo que representa a posição do item
-        retangulo = pygame.Rect(self.__x, self.__y, self.const.largura_item, self.const.largura_item)
+        rect = self.animacao_item.sprites()[0].rect
 
-        return [retangulo]
+        return [rect]
 
     def desenha_objeto(self, tela_jogo): #Desenha o item na tela do jogo
-        lista_retangulo = self.gera_retangulo()
-
-        pygame.draw.rect(tela_jogo, self.cor, lista_retangulo[0])
+        self.animacao_item.update(self.__x, self.__y)
+        self.animacao_item.draw(tela_jogo)
 
     def move(self):
         self.__x += -5

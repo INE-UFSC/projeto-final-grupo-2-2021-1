@@ -3,12 +3,18 @@
 
 from item import Item
 from constantes import Constante
-
+from animacao import ItemInvencivelAnimacao
+import pygame
 
 class ItemInvencibilidade(Item):
     def __init__(self):
         super().__init__()
         self.tempo_efeito = self.const.tempo_invencibilidade
+        self.__animacao_item = pygame.sprite.Group(ItemInvencivelAnimacao())
+
+    @property
+    def animacao_item(self):
+        return self.__animacao_item
 
     def efeito(self, personagem):
         self.__personagem = personagem
