@@ -1,5 +1,7 @@
 import pygame
 import random
+
+from pygame.draw import rect
 from constantes import Constante
 from abc import ABC, abstractmethod
 
@@ -82,7 +84,7 @@ class Cano(ABC):
     def colidiu(self, colidiu):
         self.__colidiu = colidiu
 
-    def atualiza(self, tela_jogo):
+    def atualiza(self, tela_jogo): 
         if not self.__tamanho_cano_definido:
             self.tamanho_cano()
         self.desenha_objeto(tela_jogo)
@@ -95,23 +97,18 @@ class Cano(ABC):
         self.bases = [base_superior_cano, base_inferior_cano]
         self.__tamanho_cano_definido = True 
     
-    def gera_retangulo(self):  # gera os retângulos que representarão os canos
-        retangulo1 = pygame.Rect(self.__x, self.__y1, self.__const.largura_cano, self.__base_superior)
-        retangulo2 = pygame.Rect(self.__x, self.__y2, self.__const.largura_cano, self.__base_inferior)
-        return [retangulo1, retangulo2]
+    def gera_retangulo(self):  # gera os retângulos das Sprites
+        rect_superior = self.cano_superior.sprites()[0].rect
+        rect_inferior = self.cano_inferior.sprites()[0].rect
+
+        return [rect_superior, rect_inferior]
 
     def desenha_objeto(self, tela_jogo): #Desenha o cano na tela do jogo
-        retangulos = self.gera_retangulo()
 
         self.cano_inferior.update(self.__x, self.bases[1]+315)
         self.cano_superior.update(self.__x, self.bases[0]-315)
         self.cano_inferior.draw(tela_jogo)
         self.cano_superior.draw(tela_jogo)
-        self.__y2 = self.bases[1]  
-        self.__base_superior = self.bases[0]
-        self.__base_inferior = self.__const.tela_jogo_altura - self.bases[1] 
-        pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[0])
-        pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[1])
 
     @abstractmethod
     def cano_superior(self): #Retorna sprite do cano superior

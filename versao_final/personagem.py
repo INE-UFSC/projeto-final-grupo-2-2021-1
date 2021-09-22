@@ -36,7 +36,7 @@ class Personagem(ABC):
         self.__tecla_pressionada = tecla_precionada
 
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
-        retangulo = pygame.Rect(self.__x, self.__y, self.tamanho, self.tamanho)
+        retangulo = self.__animacao.sprites()[0].rect
         return retangulo
 
     def desenha_personagem(self, tela):
