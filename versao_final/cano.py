@@ -1,6 +1,8 @@
 import pygame
 import random
 from constantes import Constante
+from animacao import CanoInferiorAnimacao
+from animacao import CanoSuperiorAnimacao
 from abc import ABC, abstractmethod
 
 # Aqui vamos construir os canos que sarão os obstáculos do nosso personagem
@@ -17,6 +19,7 @@ class Cano(ABC):
         self.__base_inferior = 0
         self.__tamanho_cano_definido = False
         self.__colidiu = False
+        self.__cano_superior = pygame.sprite.Group(CanoSuperiorAnimacao())
 
     @property
     def const(self):
