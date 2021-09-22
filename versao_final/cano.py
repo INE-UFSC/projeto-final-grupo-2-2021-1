@@ -103,11 +103,23 @@ class Cano(ABC):
     def desenha_objeto(self, tela_jogo): #Desenha o cano na tela do jogo
         retangulos = self.gera_retangulo()
 
+        self.cano_inferior.update(self.__x, self.bases[1]+315)
+        self.cano_superior.update(self.__x, self.bases[0]-315)
+        self.cano_inferior.draw(tela_jogo)
+        self.cano_superior.draw(tela_jogo)
         self.__y2 = self.bases[1]  
         self.__base_superior = self.bases[0]
         self.__base_inferior = self.__const.tela_jogo_altura - self.bases[1] 
         pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[0])
         pygame.draw.rect(tela_jogo, (0, 255, 0), retangulos[1])
+
+    @abstractmethod
+    def cano_superior(self): #Retorna sprite do cano superior
+        pass
+
+    @abstractmethod
+    def cano_inferior(self): #Retorna sprite do cano inferior
+        pass
 
     @abstractmethod
     def efeito_colisao(self):

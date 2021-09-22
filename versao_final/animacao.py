@@ -70,7 +70,7 @@ class CanoSuperiorAnimacao(Animacao):
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(388/10), int(2120/10)))
+        self.image = pygame.transform.scale(self.image, (int(388/8), int(5048/8)))
         self.__rect = self.image.get_rect(center=(x, y))
 
 class CanoInferiorAnimacao(Animacao):
@@ -92,7 +92,7 @@ class CanoInferiorAnimacao(Animacao):
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(388/10), int(2120/10)))
+        self.image = pygame.transform.scale(self.image, (int(388/8), int(5048/8)))
         self.__rect = self.image.get_rect(center=(x, y))
 
 
