@@ -37,6 +37,10 @@ class Controlador:
     @property
     def contador(self):
         return self.__contador
+    
+    @property
+    def pontos(self):
+        return self.__pontuacao
 
     def iniciar(self):
 
