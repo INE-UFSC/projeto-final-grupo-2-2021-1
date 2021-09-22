@@ -5,10 +5,10 @@ from constantes import Constante
 from abc import ABC, abstractmethod
 import pygame, sys
 
-class MenuComoJogar(Menu):
+class MenuGameOver(Menu):
     def __init__(self):
         super().__init__()
-        self.estado = 'Como Jogar'
+        self.estado = 'Game over'
 
     def desenha_botao(self):
         if self.cria_botao(20,575,100,50).collidepoint(pygame.mouse.get_pos()):
