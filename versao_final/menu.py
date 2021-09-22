@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from controlador import Controlador
 from constantes import Constante
@@ -5,7 +6,7 @@ from cenario import Cenario
 import pygame, sys
 
 
-class Menu:
+class Menu(ABC):
     def __init__(self):
         self.const = Constante()
         self.cenario = Cenario()
@@ -45,91 +46,18 @@ class Menu:
     def resetaclick(self):
         self.click = False
     
-    def botao(self, x, y, tamanhox, tamanhoy):
-        acao = False
+    def cria_botao(self, x, y, tamanhox, tamanhoy):
         botao = pygame.Rect(x, y, tamanhox, tamanhoy)
         pygame.draw.rect(self.cenario.tela, (255,0,0), botao)
-        
-        if botao.collidepoint(pygame.mouse.get_pos()):
+        return botao
+
+    @abstractmethod
+    def desenha_botao(self, x, y, tamanhox, tamanhoy, estado):
+        if self.cria_botao(x, y, tamanhox, tamanhoy).collidepoint(pygame.mouse.get_pos()):
             if self.click:
-                acao = True
-        return acao
-
-    def iniciar(self):
-        self.jogo = Controlador()
-
-        pygame.init()
-        clock = pygame.time.Clock()
-
-        self.rodando = True
-        while self.rodando:
-
-            clock.tick(self.const.fps)
-            self.jogo.cenario.inicializa_tela()
-            self.jogo.contador.contador_tempo()
-            self.jogo.gera_objetos()
-            self.jogo.detecta_colisao()
-            self.jogo.itens_ativos()
-            self.jogo.atualiza_personagem()
-            self.jogo.pontuacao()
-            self.checa_gameover(self.jogo)
-
-            self.jogo.le_eventos()
-            pygame.display.update()
+                self.estado = estado
+                self.rodando = False
     
+    @abstractmethod
     def menu(self):          
-        pygame.init()
-        while True:
-
-            self.cenario.inicializa_tela()
-            self.desenha_texto('main menu', 20, 60, 20)
-
-            if self.botao(240,250,300,75):
-                self.iniciar()
-            if self.botao(240,350,300,75):
-                self.highscore()
-            if self.botao(240,450,300,75):
-                self.como_jogar()
-
-            self.resetaclick()
-            self.eventos_menu()
-            self.atualizatela()
-
-    def highscore(self):
-
-        while True:
-            self.cenario.inicializa_tela()
-            self.desenha_texto('Highscore', 20, 60, 20)
-
-            if self.botao(20,575,100,50):
-                break
-            
-            self.resetaclick()
-            self.eventos_menu()
-            self.atualizatela()
-
-    def como_jogar(self):
-
-        while True:
-            self.cenario.inicializa_tela()
-            self.desenha_texto('Como jogar', 20, 60, 20)
-
-            if self.botao(20,575,100,50):
-                break
-            
-            self.resetaclick()
-            self.eventos_menu()
-            self.atualizatela()
-
-    def gameover(self):
-
-        while True:
-            self.cenario.inicializa_tela()
-            self.desenha_texto('Game over', 20, 60, 20)
-
-            if self.botao(20,575,100,50):
-                self.menu()
-            
-            self.resetaclick()
-            self.eventos_menu()
-            self.atualizatela()
+        pass
