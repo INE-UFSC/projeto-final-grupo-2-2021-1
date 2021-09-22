@@ -2,14 +2,14 @@ from abc import ABC, abstractmethod
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from controlador import Controlador
 from constantes import Constante
-from cenario import Cenario
+from cenariomenu import CenarioMenu
 import pygame, sys
 
 
 class Menu(ABC):
     def __init__(self):
         self.const = Constante()
-        self.cenario = Cenario()
+        self.cenario = CenarioMenu()
         self.__fonte = pygame.font.get_default_font()
         self.click = False
 
