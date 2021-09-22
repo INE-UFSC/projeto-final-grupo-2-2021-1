@@ -11,22 +11,20 @@ class MenuHighscore(Menu):
         self.estado = 'Highscore'
 
     def desenha_botao(self):
-        acao = False
         if self.cria_botao(20,575,100,50).collidepoint(pygame.mouse.get_pos()):
             if self.click:
-                acao = True
-        return acao
+                self.estado = 'Main Menu'
+                self.rodando = False
 
     def menu(self):
         
         pygame.init()
-        while True:
+        self.rodando = True
+        while self.rodando:
             self.cenario.inicializa_tela()
             self.desenha_texto(self.estado, 20, 60, 20)
 
-            if self.desenha_botao():
-                self.estado = 'Main Menu'
-                break
+            self.desenha_botao()
             
             self.resetaclick()
             self.eventos_menu()
