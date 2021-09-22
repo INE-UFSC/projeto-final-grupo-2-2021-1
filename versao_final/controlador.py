@@ -17,6 +17,7 @@ from canoPadrao import CanoPadrao
 class Controlador:
     def __init__(self) -> None:
         self.const = Constante()
+        self.estado = 'Jogo'
         self.__personagem = Jogador(self.const.posicao_personagem_x, self.const.posicao_personagem_y)
         self.__cenario = Cenario()
         self.__contador = Contador()
@@ -54,10 +55,13 @@ class Controlador:
             self.atualiza_personagem()
             self.pontuacao()
 
+            if self.__personagem.game_over == True:
+                if self.__personagem.voando == False:
+                    self.estado = 'Game over'
+                    break
+
             self.le_eventos()
             pygame.display.update()
-
-        pygame.quit()
 
     def atualiza_personagem(self):
         self.__personagem.desenha_personagem(self.__cenario.tela)
