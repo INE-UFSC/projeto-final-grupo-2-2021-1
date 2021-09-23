@@ -1,7 +1,6 @@
 # Aqui a gente vai construir a classe do nosso personagem
 # A ideia posteriormente é especializar essa classe, tendo vários personagens com características diferentes
 
-from typing import List
 import pygame
 from constantes import Constante
 from abc import ABC, abstractmethod
@@ -9,7 +8,7 @@ from animacao import PersonagemAnimacao
 
 class Personagem(ABC):
     def __init__(self, x, y):
-        self.const = Constante()
+        self.__const = Constante()
         self.__animacao = pygame.sprite.Group(PersonagemAnimacao())
         self.__x = x
         self.__y = y
@@ -31,13 +30,29 @@ class Personagem(ABC):
     def animacao(self):
         return self.__animacao
     
+    @property
+    def const(self):
+        return self.__const
+    
+    @x.setter
+    def x(self, x):
+        self.__x = x
+    
     @y.setter
     def y(self, y):
         self.__y = y
 
     @tecla_pressionada.setter
-    def tecla_pressionada(self, tecla_precionada):
-        self.__tecla_pressionada = tecla_precionada
+    def tecla_pressionada(self, tecla_pressionada):
+        self.__tecla_pressionada = tecla_pressionada
+    
+    @animacao.setter
+    def animacao(self, animacao):
+        self.__animacao = animacao
+
+    @const.setter
+    def const(self, const):
+        self.__const = const
 
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
         retangulo = self.__animacao.sprites()[0].rect
