@@ -14,12 +14,6 @@ class PaginaComoJogar(Pagina):
             botao.atualizar(100,y)
             botao.desenhar(self.cenario.tela)
             y += 100
-    
-    def detecta_colisao(self):
-        for botao in self.botoes:
-            if botao.gera_retangulo().collidepoint(pygame.mouse.get_pos()) and self.click:
-                self.estado = botao.efeito_colisao()
-                self.rodando = False
 
     def menu(self):
         

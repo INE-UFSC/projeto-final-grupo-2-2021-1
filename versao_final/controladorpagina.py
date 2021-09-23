@@ -15,19 +15,18 @@ class ContraladorPagina:
         self.__pagina_como_jogar = PaginaComoJogar()
         self.__pagina_fim_de_jogo = PaginaFimDeJogo(1)
 
-        self.menuname = None
+        self.__pagina_atual = None
 
     def verifica_menu(self):
-        print(self.menuname)
-        if self.menuname == 'MenuPrincipal':
+        if self.__pagina_atual == 'MenuPrincipal':
             self.menu_principal()
-        elif self.menuname == 'Jogo':
+        elif self.__pagina_atual == 'Jogo':
             self.jogar()
-        elif self.menuname == 'Pontuacao':
+        elif self.__pagina_atual == 'Pontuacao':
             self.ranque_pontuacao()
-        elif self.menuname == 'ComoJogar':
+        elif self.__pagina_atual == 'ComoJogar':
             self.como_jogar()
-        elif self.menuname == 'FimDeJogo':
+        elif self.__pagina_atual == 'FimDeJogo':
             self.fim_jogo()
         else:
             raise KeyError("O botão clicado não foi instanciado Corretamente!")
@@ -35,29 +34,29 @@ class ContraladorPagina:
     def menu_principal(self):
         self.__pagina_menu = PaginaMenu()
         self.__pagina_menu.menu()
-        self.menuname = self.__pagina_menu.estado
+        self.__pagina_atual = self.__pagina_menu.estado
         self.verifica_menu()
 
     def jogar(self):
         self.__controlador_jogo = Controlador()
         self.__controlador_jogo.iniciar()
-        self.menuname = self.__controlador_jogo.estado
+        self.__pagina_atual = self.__controlador_jogo.estado
         self.verifica_menu()
 
     def ranque_pontuacao(self):
         self.__pagina_pontuacao = PaginaPontuacao()
         self.__pagina_pontuacao.menu()
-        self.menuname = self.__pagina_pontuacao.estado
+        self.__pagina_atual = self.__pagina_pontuacao.estado
         self.verifica_menu()
 
     def como_jogar(self):
         self.__pagina_como_jogar = PaginaComoJogar()
         self.__pagina_como_jogar.menu()
-        self.menuname = self.__pagina_como_jogar.estado
+        self.__pagina_atual = self.__pagina_como_jogar.estado
         self.verifica_menu()
 
     def fim_jogo(self):
         self.__pagina_fim_de_jogo = PaginaFimDeJogo(1)
         self.__pagina_fim_de_jogo.menu()
-        self.menuname = self.__pagina_fim_de_jogo.estado
+        self.__pagina_atual = self.__pagina_fim_de_jogo.estado
         self.verifica_menu()

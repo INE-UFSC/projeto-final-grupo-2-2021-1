@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from spritebotoes import SpriteBotaoJogar, SpriteBotaoComoJogar, SpriteBotaoPontuacao, SpriteBotaoVoltar
+from animacao import Animacao
+from spritebotoes import SpriteBotaoJogar, SpriteBotaoComoJogar, \
+        SpriteBotaoPontuacao, SpriteBotaoVoltar, SpriteCaixaTexto
 import pygame
 
 class BotaoGenerico(ABC):
@@ -52,3 +54,11 @@ class BotaoVoltar(BotaoGenerico):
 
     def efeito_colisao(self):
         return "MenuPrincipal"
+
+class CaixaTexto(BotaoGenerico):
+    def __init__(self) -> None:
+        sprite = pygame.sprite.Group(SpriteCaixaTexto())
+        super().__init__(sprite)
+
+    def efeito_colisao(self):
+        return True

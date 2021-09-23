@@ -60,6 +60,12 @@ class Pagina(ABC):
         pygame.draw.rect(self.cenario.tela, (255,0,0), botao)
         return botao
 
+    def detecta_colisao(self):
+        for botao in self.botoes:
+            if botao.gera_retangulo().collidepoint(pygame.mouse.get_pos()) and self.click:
+                self.estado = botao.efeito_colisao()
+                self.rodando = False
+
     @abstractmethod
     def desenha_botao(self):
         pass
