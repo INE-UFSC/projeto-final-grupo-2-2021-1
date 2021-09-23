@@ -1,17 +1,17 @@
-from menu import Menu
+from pagina import Pagina
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from controlador import Controlador
 from constantes import Constante
 from abc import ABC, abstractmethod
 import pygame, sys
 
-class MenuHighscore(Menu):
+class PaginaComoJogar(Pagina):
     def __init__(self):
         super().__init__()
-        self.estado = 'Highscore'
+        self.estado = 'Como Jogar'
 
     def desenha_botao(self):
-        if self.cria_botao(20,575,100,50).collidepoint(pygame.mouse.get_pos()):
+        if self.cria_botao(20,575).collidepoint(pygame.mouse.get_pos()):
             if self.click:
                 self.estado = 'Main Menu'
                 self.rodando = False
@@ -28,4 +28,4 @@ class MenuHighscore(Menu):
             
             self.resetaclick()
             self.eventos_menu()
-            self.atualizatela()
+            self.atualiza_tela()

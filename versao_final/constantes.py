@@ -4,6 +4,8 @@ class Constante(Singleton):
     def __init__(self) -> None:
         self.tela_jogo_largura = 780
         self.tela_jogo_altura = 640
+        self.botao_maior_x = 300
+        self.botao_maior_y = 75
         self.posicao_gera_cano = 320
         self.largura_cano = 40
         self.largura_item = 20

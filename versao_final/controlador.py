@@ -39,7 +39,7 @@ class Controlador:
         return self.__contador
     
     @property
-    def pontos(self):
+    def pontuacao(self):
         return self.__pontuacao
 
     def iniciar(self):

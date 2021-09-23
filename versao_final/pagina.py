@@ -2,14 +2,13 @@ from abc import ABC, abstractmethod
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from controlador import Controlador
 from constantes import Constante
-from cenariomenu import CenarioMenu
+from cenario import Cenario
 import pygame, sys
 
-
-class Menu(ABC):
+class Pagina(ABC):
     def __init__(self):
         self.const = Constante()
-        self.cenario = CenarioMenu()
+        self.cenario = Cenario()
         self.__fonte = pygame.font.get_default_font()
         self.click = False
 
@@ -34,7 +33,7 @@ class Menu(ABC):
                 if event.button == 1:
                     self.click = True
 
-    def atualizatela(self):
+    def atualiza_tela(self):
             pygame.display.update()
             self.mainclock.tick(self.const.fps)
 
@@ -46,13 +45,13 @@ class Menu(ABC):
     def resetaclick(self):
         self.click = False
     
-    def cria_botao(self, x, y, tamanhox, tamanhoy):
-        botao = pygame.Rect(x, y, tamanhox, tamanhoy)
+    def cria_botao(self, x, y):
+        botao = pygame.Rect(x, y, self.const.botao_maior_x, self.const.botao_maior_y)
         pygame.draw.rect(self.cenario.tela, (255,0,0), botao)
         return botao
 
     @abstractmethod
-    def desenha_botao(self, x, y, tamanhox, tamanhoy, estado):
+    def desenha_botao(self):
         pass
     
     @abstractmethod
