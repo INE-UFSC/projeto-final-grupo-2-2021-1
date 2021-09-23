@@ -10,7 +10,7 @@ from geradorItem import GeradorItem, GeradorItemInvencibilidade, GeradorItemTama
 from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
-from colisão import Colisao
+from colisao import Colisao
 from canoPadrao import CanoPadrao
 
 
@@ -124,7 +124,7 @@ class Controlador:
 
     def detecta_colisao(self):
         for objeto in self.__lista_objetos:
-            self.__colisao.detectar_colisão(self.__personagem, objeto)
+            self.__colisao.detectar_colisao(self.__personagem, objeto)
 
     def pontuacao(self):
 
