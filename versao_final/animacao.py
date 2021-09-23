@@ -161,7 +161,6 @@ class ChaoAnimacao(Animacao):
         self.image = self.sprites[int(self.sprite_atual)]
         self.image = pygame.transform.scale(self.image, ((int(3072/3.5)), (int(208/3.5))))
         self.__rect = self.image.get_rect(center=(self.posicao_chao, self.const.tela_jogo_altura-30))
-        self.move_chao()
 
     def move_chao(self):
         if self.posicao_chao <= 347:
