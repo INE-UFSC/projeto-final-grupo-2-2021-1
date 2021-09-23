@@ -1,24 +1,23 @@
 from pygame import event
 from pagina import Pagina
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
-from botaogenerico import BotaoVoltar, CaixaTexto
-from melhorpontuacao import MelhorPontuacao
+from botaogenerico import BotaoVoltar, BotaoSalvar, CaixaTexto
 import pygame, sys
 
 class PaginaFimDeJogo(Pagina):
-    def __init__(self, pontuacao: int):
+    def __init__(self, pontuacao):
         super().__init__()
-        self.__fonte_entrada_texto = pygame.font.SysFont('Comic Sans MS', 30)
+        self.__pontuacao_personagem = pontuacao
         self.__caixa_texto = CaixaTexto()
+        self.__instancia_botoes()
+        self.estado = ''
+        self.__texto_ativo = False
+        self.nome_usuario = ''
+
+    def __instancia_botoes(self):
         self.botoes.append(BotaoVoltar())
         self.botoes.append(self.__caixa_texto)
-        self.pontuacao = pontuacao
-        self.estado = 'MenuPrincipal'
-        self.__texto_ativo = False
-        self.texto_usuario = ''
-        self.checar_ponto = MelhorPontuacao()
-        self.salvo = False
-        self.rank = None
+        self.botoes.append(BotaoSalvar())
 
     def desenha_botao(self, y):
         for botao in self.botoes:
@@ -28,13 +27,24 @@ class PaginaFimDeJogo(Pagina):
             else:
                 botao.atualizar(self.const.tela_jogo_largura/2, y)
                 botao.desenhar(self.cenario.tela)
-                y += 100
+                y += 70
+    
+    def gera_fonte(self, texto, tamanho_fonte):
+        fonte = pygame.font.SysFont('Comic Sans MS', tamanho_fonte)
+        texto_fonte = fonte.render(str(texto).upper(), True, (255, 255, 255))
+
+        return texto_fonte
+
+    def mostra_pontos(self):
+        pass
 
     def detecta_colisao(self):
         for botao in self.botoes:
             if botao.gera_retangulo().collidepoint(pygame.mouse.get_pos()) and self.click:
                 if isinstance(botao, CaixaTexto):
                     self.__texto_ativo = botao.efeito_colisao()
+                elif isinstance(botao, BotaoSalvar):
+                    self.estado = botao.efeito_colisao(self.__pontuacao_personagem.pontos, self.nome_usuario)
                 else:
                     self.estado = botao.efeito_colisao()
                     self.rodando = False
@@ -50,32 +60,23 @@ class PaginaFimDeJogo(Pagina):
                     sys.exit
                 if event.type == pygame.KEYDOWN and self.__texto_ativo:
                     if event.key == pygame.K_BACKSPACE:
-                        self.texto_usuario = self.texto_usuario[0:-1]
-                    elif len(self.texto_usuario) < 3:
-                        self.texto_usuario += event.unicode
+                        self.nome_usuario = self.nome_usuario[0:-1]
+                    elif len(self.nome_usuario) < 3:
+                        self.nome_usuario += event.unicode
                     
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     self.click = True
 
     def inserir_nome(self):
-        texto_usuario = self.__fonte_entrada_texto.render(self.texto_usuario.upper(), True, (255, 255, 255))
-        self.cenario.tela.blit(texto_usuario, ((self.const.tela_jogo_largura/2)-20,240))
 
-    def checapontos(self):
-        if not self.salvo:
-            if self.checar_ponto.checapontuacao(self.pontuacao):
-                self.inserir_nome()
-                if len(self.texto_usuario) >= 3:
-                    self.checar_ponto.novapontuacao(self.pontuacao, self.texto_usuario)
-                    self.salvo = True
-            else:
-                self.desenha_botao(250)
-        else:
-            self.desenha_botao(250)
+        self.cenario.tela.blit(self.gera_fonte(self.nome_usuario, 30), \
+            ((self.const.tela_jogo_largura/2)-20,240))
 
-    def atualizarank(self):
-        self.rank = self.checar_ponto.score
+    def inserir_pontuacao(self):
+
+        self.cenario.tela.blit(self.gera_fonte(self.__pontuacao_personagem.pontos, 50), \
+            ((self.const.tela_jogo_largura/2)-20,150))
 
     def menu(self):
         
@@ -88,11 +89,8 @@ class PaginaFimDeJogo(Pagina):
             self.desenha_botao(250)
             self.detecta_colisao()
             self.inserir_nome()
+            self.inserir_pontuacao()
 
             self.resetaclick()
             self.eventos_menu()
             self.atualiza_tela()
-           
-            #self.checapontos()
-            #self.atualizarank()
-

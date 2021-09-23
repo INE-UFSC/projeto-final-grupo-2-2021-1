@@ -9,11 +9,12 @@ from controlador import Controlador
 
 class ContraladorPagina:
     def __init__(self):
-        self.__controlador_jogo = Controlador()
-        self.__pagina_menu = PaginaMenu()
-        self.__pagina_pontuacao = PaginaPontuacao()
-        self.__pagina_como_jogar = PaginaComoJogar()
-        self.__pagina_fim_de_jogo = PaginaFimDeJogo(1)
+        self.__pontuacao_jogo = 0
+        self.__controlador_jogo = None 
+        self.__pagina_menu = None
+        self.__pagina_pontuacao = None
+        self.__pagina_como_jogar = None
+        self.__pagina_fim_de_jogo = None
 
         self.__pagina_atual = None
 
@@ -40,6 +41,8 @@ class ContraladorPagina:
     def jogar(self):
         self.__controlador_jogo = Controlador()
         self.__controlador_jogo.iniciar()
+        if self.__controlador_jogo.fim_de_jogo:
+            self.__pontuacao_jogo = self.__controlador_jogo.pontuacao
         self.__pagina_atual = self.__controlador_jogo.estado
         self.verifica_menu()
 
@@ -56,7 +59,7 @@ class ContraladorPagina:
         self.verifica_menu()
 
     def fim_jogo(self):
-        self.__pagina_fim_de_jogo = PaginaFimDeJogo(1)
+        self.__pagina_fim_de_jogo = PaginaFimDeJogo(self.__pontuacao_jogo)
         self.__pagina_fim_de_jogo.menu()
         self.__pagina_atual = self.__pagina_fim_de_jogo.estado
         self.verifica_menu()

@@ -24,6 +24,7 @@ class Controlador:
         self.__itens_ativos = []
         self.__pontuacao = Pontuacao()
         self.__colisao = Colisao()
+        self.__fim_de_jogo = None
 
     @property
     def cenario(self):
@@ -40,6 +41,10 @@ class Controlador:
     @property
     def pontuacao(self):
         return self.__pontuacao
+
+    @property
+    def fim_de_jogo(self):
+        return self.__fim_de_jogo
 
     def iniciar(self):
 
@@ -66,6 +71,7 @@ class Controlador:
         self.__personagem.desenha_personagem(self.__cenario.tela)
         self.__personagem.mover()
         self.__personagem.morreu(self.__cenario.chao)
+        self.__fim_de_jogo = self.__personagem.game_over
 
     def gera_objetos(self):
 

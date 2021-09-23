@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
-from animacao import Animacao
+from pontuacaoDAO import PontuacaoDAO
 from spritebotoes import SpriteBotaoJogar, SpriteBotaoComoJogar, \
-        SpriteBotaoPontuacao, SpriteBotaoVoltar, SpriteCaixaTexto
+        SpriteBotaoPontuacao, SpriteBotaoSalvar, SpriteBotaoVoltar, SpriteCaixaTexto
 import pygame
 
 class BotaoGenerico(ABC):
@@ -53,6 +53,17 @@ class BotaoVoltar(BotaoGenerico):
         super().__init__(sprite)
 
     def efeito_colisao(self):
+        return "MenuPrincipal"
+
+class BotaoSalvar(BotaoGenerico):
+    def __init__(self) -> None:
+        sprite = pygame.sprite.Group(SpriteBotaoSalvar())
+        super().__init__(sprite)
+        self.__pontuacao_dao = PontuacaoDAO() 
+
+    def efeito_colisao(self, pontuacao, nome):
+        self.__pontuacao_dao.add(nome, pontuacao)
+
         return "MenuPrincipal"
 
 class CaixaTexto(BotaoGenerico):
