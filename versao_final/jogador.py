@@ -3,8 +3,8 @@ from personagem import Personagem
 
 
 class Jogador(Personagem):
-    def __init__(self, x, y):
-        super().__init__(x, y)
+    def __init__(self):
+        super().__init__()
         self.__velocidade = 0 
         self.__voando = False 
         self.__game_over = False

@@ -18,7 +18,7 @@ class Controlador:
     def __init__(self) -> None:
         self.const = Constante()
         self.estado = 'Jogo'
-        self.__personagem = Jogador(self.const.posicao_personagem_x, self.const.posicao_personagem_y)
+        self.__personagem = Jogador()
         self.__cenario = Cenario()
         self.__contador = Contador()
         self.__lista_objetos = []

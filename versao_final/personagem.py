@@ -7,11 +7,11 @@ from abc import ABC, abstractmethod
 from animacao import PersonagemAnimacao
 
 class Personagem(ABC):
-    def __init__(self, x, y):
+    def __init__(self):
         self.__const = Constante()
         self.__animacao = pygame.sprite.Group(PersonagemAnimacao())
-        self.__x = x
-        self.__y = y
+        self.__x = self.__const.posicao_personagem_x
+        self.__y = self.__const.posicao_personagem_y
         self.__tecla_pressionada = False
     
     @property
