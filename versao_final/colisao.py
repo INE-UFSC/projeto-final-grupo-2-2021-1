@@ -2,7 +2,7 @@ class Colisao:
     def __init__(self) -> None:
         pass
 
-    def detectar_colisão(self, personagem, objeto):
+    def detectar_colisao(self, personagem, objeto):
         
         lista_retangulos = objeto.gera_retangulo()
 
