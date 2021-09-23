@@ -61,7 +61,7 @@ class Controlador:
 
             if self.__personagem.game_over == True:
                 if self.__personagem.voando == False:
-                    self.estado = 'Game over'
+                    self.estado = 'FimDeJogo'
                     break
 
             self.le_eventos()

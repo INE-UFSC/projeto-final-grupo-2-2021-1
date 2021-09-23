@@ -18,16 +18,19 @@ class ContraladorPagina:
         self.menuname = None
 
     def verifica_menu(self):
-        if self.menuname == 'Main Menu':
+        print(self.menuname)
+        if self.menuname == 'MenuPrincipal':
             self.menu_principal()
         elif self.menuname == 'Jogo':
             self.jogar()
-        elif self.menuname == 'Highscore':
+        elif self.menuname == 'Pontuacao':
             self.ranque_pontuacao()
-        elif self.menuname == 'Como Jogar':
+        elif self.menuname == 'ComoJogar':
             self.como_jogar()
-        elif self.menuname == 'Game over':
+        elif self.menuname == 'FimDeJogo':
             self.fim_jogo()
+        else:
+            raise KeyError("O botão clicado não foi instanciado Corretamente!")
 
     def menu_principal(self):
         self.__pagina_menu = PaginaMenu()
