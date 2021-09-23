@@ -3,6 +3,7 @@ from constantes import Constante
 from animacao import PersonagemAnimacao
 from personagem import Personagem
 
+
 class Jogador(Personagem):
     def __init__(self, x, y):
         super().__init__(x, y)
@@ -32,9 +33,9 @@ class Jogador(Personagem):
             if not teclas[pygame.K_UP]:
                 self.tecla_pressionada = False
 
-    def morreu(self):
+    def morreu(self, chao):
          # checa se o personagem atingiu o chão
-        if self.y + self.tamanho >= self.const.tela_jogo_altura:
+        if self.gera_retangulo().colliderect(chao.sprites()[0].rect):
             self.game_over = True
             self.voando = False
         # checa se o personagem saiu da tela

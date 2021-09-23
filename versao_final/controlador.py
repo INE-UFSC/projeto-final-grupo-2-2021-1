@@ -70,7 +70,7 @@ class Controlador:
     def atualiza_personagem(self):
         self.__personagem.desenha_personagem(self.__cenario.tela)
         self.__personagem.mover()
-        self.__personagem.morreu()
+        self.__personagem.morreu(self.__cenario.chao)
 
     def gera_objetos(self):
 

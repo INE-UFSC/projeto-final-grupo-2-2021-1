@@ -139,5 +139,31 @@ class ItemPequenoAnimacao(Animacao):
         self.image = pygame.transform.scale(self.image, (int(50*1.3), int(50*1.3)))
         self.__rect = self.image.get_rect(center=(x, y))
 
+class ChaoAnimacao(Animacao):
+    def __init__(self) -> None:
+        super().__init__(['versao_final/sprites/cenario/chao/'])
+        self.posicao_chao = 438.5
+        self.__rect = self.image.get_rect(center=(self.posicao_chao, self.const.tela_jogo_altura-30))
+        self.velocidade_chao = 2
+    
+    @property
+    def rect(self):
+        return self.__rect
 
+    @rect.setter
+    def rect(self, rect):
+        self.__rect = rect
+    
+    def update(self):
+        self.sprite_atual = self.sprite_atual + 0.05
+        if self.sprite_atual >= len(self.sprites):
+            self.sprite_atual = 0
+        self.image = self.sprites[int(self.sprite_atual)]
+        self.image = pygame.transform.scale(self.image, ((int(3072/3.5)), (int(208/3.5))))
+        self.__rect = self.image.get_rect(center=(self.posicao_chao, self.const.tela_jogo_altura-30))
+        self.move_chao()
 
+    def move_chao(self):
+        if self.posicao_chao <= 347:
+            self.posicao_chao = 438.5
+        self.posicao_chao -= self.velocidade_chao

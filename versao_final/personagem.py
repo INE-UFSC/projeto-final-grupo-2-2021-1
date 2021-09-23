@@ -27,6 +27,10 @@ class Personagem(ABC):
     def tecla_pressionada(self):
         return self.__tecla_pressionada
     
+    @property
+    def animacao(self):
+        return self.__animacao
+    
     @y.setter
     def y(self, y):
         self.__y = y
