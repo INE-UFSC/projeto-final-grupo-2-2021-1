@@ -6,12 +6,11 @@ from jogador import Jogador
 from canoPadrao import CanoPadrao
 from cano import Cano
 from cenario import Cenario
-from geradorItem import GeradorItem, GeradorItemInvencibilidade, GeradorItemTamanho
+from geradorItem import GeradorItem
 from contador import Contador
 from constantes import Constante
 from pontuacao import Pontuacao
 from colisao import Colisao
-from canoPadrao import CanoPadrao
 
 
 class Controlador:
@@ -57,14 +56,9 @@ class Controlador:
             self.detecta_colisao()
             self.itens_ativos()
             self.atualiza_personagem()
-            self.pontuacao()
-
-            if self.__personagem.game_over == True:
-                if self.__personagem.voando == False:
-                    self.estado = 'FimDeJogo'
-                    break
-
+            self.atualiza_pontuacao()
             self.le_eventos()
+            self.confere_fim_de_jogo()
             pygame.display.update()
 
     def atualiza_personagem(self):
@@ -126,20 +120,24 @@ class Controlador:
         for objeto in self.__lista_objetos:
             self.__colisao.detectar_colisao(self.__personagem, objeto)
 
-    def pontuacao(self):
-
+    def atualiza_pontuacao(self):
         for cano in self.__lista_objetos:
-            if cano.x == self.const.posicao_pontuar:
-                if isinstance(cano, Cano):
-                    self.__pontuacao.marca_ponto(1)
+            if cano.x == self.const.posicao_pontuar and isinstance(cano, Cano):
+                self.__pontuacao.marca_ponto(1)
 
         self.__cenario.escreve_pontuacao(self.__pontuacao.mostra_ponto())
 
     def le_eventos(self):
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                self.rodando = False
-            if evento.type == pygame.KEYDOWN and not self.__personagem.voando and not self.__personagem.game_over:
-                if evento.key == pygame.K_UP:
-                    self.__personagem.voando = True
+                pygame.quit()
+            if (evento.type == pygame.KEYDOWN 
+                    and evento.key == pygame.K_UP
+                    and not self.__personagem.voando 
+                    and not self.__personagem.game_over):
+                self.__personagem.voando = True
     
+    def confere_fim_de_jogo(self):
+        if self.__personagem.game_over and not self.__personagem.voando:
+            self.estado = 'FimDeJogo'
+            self.rodando = False
