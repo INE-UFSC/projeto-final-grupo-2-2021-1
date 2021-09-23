@@ -13,6 +13,10 @@ class Cenario(Tela, Singleton):
 
     def inicializa_tela(self):
         self.tela.blit(self.fundo, (0, 0))
+    
+    def atualiza_chao(self, personagem):
+        if personagem.voando and not personagem.game_over:
+            self.chao.sprites()[0].move_chao()
         self.chao.update()
         self.chao.draw(self.tela)
     

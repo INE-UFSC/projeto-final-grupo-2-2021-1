@@ -53,6 +53,7 @@ class Controlador:
             self.__cenario.inicializa_tela()
             self.__contador.contador_tempo()
             self.gera_objetos()
+            self.__cenario.atualiza_chao(self.__personagem)
             self.detecta_colisao()
             self.itens_ativos()
             self.atualiza_personagem()
