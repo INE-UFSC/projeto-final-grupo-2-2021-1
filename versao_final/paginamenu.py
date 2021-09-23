@@ -6,20 +6,20 @@ import pygame, sys
 class PaginaMenu(Pagina):
     def __init__(self):
         super().__init__()
-        self.__botoes = []
-        self.__botoes.append(BotaoJogar())
-        self.__botoes.append(BotaoComoJogar())
-        self.__botoes.append(BotaoPontuacao())
-        self.estado = 'Main Menu'
+        self.botoes = []
+        self.botoes.append(BotaoJogar())
+        self.botoes.append(BotaoComoJogar())
+        self.botoes.append(BotaoPontuacao())
+        self.estado = 'MenuPrincipal'
 
     def desenha_botao(self, y):
-        for botao in self.__botoes:
+        for botao in self.botoes:
             botao.atualizar(self.const.tela_jogo_largura/2,y)
             botao.desenhar(self.cenario.tela)
             y += 100
     
     def detecta_colisao(self):
-        for botao in self.__botoes:
+        for botao in self.botoes:
             if botao.gera_retangulo().collidepoint(pygame.mouse.get_pos()) and self.click:
                 self.estado = botao.efeito_colisao()
                 self.rodando = False
@@ -31,7 +31,7 @@ class PaginaMenu(Pagina):
         while self.rodando:
 
             self.cenario.inicializa_tela()
-            self.desenha_texto('main menu', 20, 60, 20)
+            self.desenha_texto("Menu Principal",40)
 
             self.desenha_botao(250)
             self.detecta_colisao()
