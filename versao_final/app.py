@@ -1,5 +1,5 @@
-from menucontroller import MenuController
+from controladorpagina import ContraladorPagina
 
 
-control = MenuController()
-control.main_menu()
+control = ContraladorPagina()
+control.menu_principal()
