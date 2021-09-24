@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import os
 from constantes import Constante
 
+
 class Animacao(pygame.sprite.Sprite, ABC):
     def __init__(self, diretorio) -> None:
         pygame.sprite.Sprite.__init__(self)
@@ -32,8 +33,8 @@ class Animacao(pygame.sprite.Sprite, ABC):
 class PersonagemAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/personagem/'])
+        self.__dimensoes = self.const.dimensoes_personagem
         self.__rect = self.image.get_rect(center=(self.const.posicao_personagem_x, self.const.posicao_personagem_y))
-        self.inicio_posicao = True
 
     @property
     def rect(self):
@@ -42,20 +43,27 @@ class PersonagemAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
+    
+    @property
+    def dimensoes(self):
+        return self.__dimensoes
+
+    @dimensoes.setter
+    def dimensoes(self, dimensoes):
+        self.__dimensoes = dimensoes
 
     def update(self, x, y):
         self.sprite_atual = self.sprite_atual + 0.05
         if self.sprite_atual >= len(self.sprites):
             self.sprite_atual = 0
         self.image = self.sprites[int(self.sprite_atual)]
-        self.image = pygame.transform.scale(self.image, (int(716/11), int(632/11)))
+        self.image = pygame.transform.scale(self.image, self.dimensoes)
         self.__rect = self.image.get_rect(center=(x, y))
-    
+
 class CanoSuperiorAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/cano/canosuperior/'])
         self.__rect = self.image.get_rect(center=(self.const.posicao_gera_cano, 0))
-        self.inicio_posicao = True
 
     @property
     def rect(self):
@@ -77,7 +85,6 @@ class CanoInferiorAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/cano/canoinferior/'])
         self.__rect = self.image.get_rect(center=(self.const.posicao_gera_cano, 0))
-        self.inicio_posicao = True
 
     @property
     def rect(self):
@@ -99,7 +106,6 @@ class ItemInvencivelAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/item/iteminvencibilidade/'])
         self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
-        self.inicio_posicao = True
 
     @property
     def rect(self):
@@ -121,7 +127,6 @@ class ItemPequenoAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/item/itempequeno/'])
         self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
-        self.inicio_posicao = True
 
     @property
     def rect(self):
@@ -144,8 +149,8 @@ class ChaoAnimacao(Animacao):
         super().__init__(['versao_final/sprites/cenario/chao/'])
         self.posicao_chao = 438.5
         self.__rect = self.image.get_rect(center=(self.posicao_chao, self.const.tela_jogo_altura-30))
-        self.velocidade_chao = 2
-    
+        self.velocidade_chao = 2    
+
     @property
     def rect(self):
         return self.__rect
@@ -155,10 +160,6 @@ class ChaoAnimacao(Animacao):
         self.__rect = rect
     
     def update(self):
-        self.sprite_atual = self.sprite_atual + 0.05
-        if self.sprite_atual >= len(self.sprites):
-            self.sprite_atual = 0
-        self.image = self.sprites[int(self.sprite_atual)]
         self.image = pygame.transform.scale(self.image, ((int(3072/3.5)), (int(208/3.5))))
         self.__rect = self.image.get_rect(center=(self.posicao_chao, self.const.tela_jogo_altura-30))
 

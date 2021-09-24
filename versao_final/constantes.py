@@ -15,6 +15,8 @@ class Constante(Singleton):
         self.posicao_personagem_x = 160
         self.posicao_personagem_y = 300
         self.tamanho_personagem = 35
+        self.dimensoes_personagem = (65, 57)
+        self.dimensoes_personagem_item_tamanho = (47, 42)
         self.fps = 60
         self.tempo_invencibilidade = 5
         self.tempo_pequeno = 7

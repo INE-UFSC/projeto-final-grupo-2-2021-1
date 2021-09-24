@@ -29,12 +29,12 @@ class ItemTamanho(Item):
 
     def efeito(self, personagem):
         self.__personagem = personagem
-        self.__personagem.tamanho = 18
+        personagem.animacao.sprites()[0].dimensoes = self.const.dimensoes_personagem_item_tamanho
         self.colidiu = True
         self.ativo = True
 
     def reverter(self):
-        self.__personagem.tamanho = 35
+        self.__personagem.animacao.sprites()[0].dimensoes = self.const.dimensoes_personagem
         self.ativo = False
 
     def tempo_item(self):
