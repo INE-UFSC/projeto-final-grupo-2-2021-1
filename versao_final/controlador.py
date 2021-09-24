@@ -109,7 +109,7 @@ class Controlador:
         gerador_selecionado = random.choice(geradores_de_itens)
         item = gerador_selecionado().criador_item()
 
-        if random.randint(1,2) == 1:
+        if random.randint(1,5) == 1:
             self.__lista_objetos.append(item)
 
 
@@ -138,7 +138,7 @@ class Controlador:
     def atualiza_pontuacao(self):
         for cano in self.__lista_objetos:
             if cano.x == self.const.posicao_pontuar and isinstance(cano, Cano) \
-                and not self.personagem.game_over:
+                and not self.personagem.game_over and self.personagem.voando:
                 self.__pontuacao.marca_ponto(1)
 
         self.__cenario.escreve_pontuacao(self.__pontuacao.mostra_ponto())
