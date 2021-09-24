@@ -6,7 +6,7 @@ class SpriteBotaoJogar(Animacao):
         super().__init__(['versao_final/sprites/botoes/jogar/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True
-        self.__dimensoes = (192, 48)
+        self.dimensoes = (192, 48)
 
     @property
     def rect(self):
@@ -15,21 +15,13 @@ class SpriteBotaoJogar(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class SpriteBotaoComoJogar(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/botoes/comojogar/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True
-        self.__dimensoes = (192, 48)
+        self.dimensoes = (192, 48)
 
     @property
     def rect(self):
@@ -38,21 +30,13 @@ class SpriteBotaoComoJogar(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class SpriteBotaoVoltar(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/botoes/voltar/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True
-        self.__dimensoes = (192, 48)
+        self.dimensoes = (192, 48)
 
     @property
     def rect(self):
@@ -61,21 +45,13 @@ class SpriteBotaoVoltar(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class SpriteBotaoPontuacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/botoes/pontuacao/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True
-        self.__dimensoes = (192, 48)
+        self.dimensoes = (192, 48)
 
     @property
     def rect(self):
@@ -84,14 +60,6 @@ class SpriteBotaoPontuacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
     
 class SpriteCaixaTexto(Animacao):
 
@@ -99,7 +67,7 @@ class SpriteCaixaTexto(Animacao):
         super().__init__(['versao_final/sprites/caixatexto/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True    
-        self.__dimensoes = (192, 48)
+        self.dimensoes = (192, 48)
 
     @property
     def rect(self):
@@ -108,14 +76,6 @@ class SpriteCaixaTexto(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
     
 class SpriteBotaoSalvar(Animacao):
 
@@ -123,7 +83,7 @@ class SpriteBotaoSalvar(Animacao):
         super().__init__(['versao_final/sprites/botoes/salvar/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True   
-        self.__dimensoes = (192, 48) 
+        self.dimensoes = (192, 48) 
 
     @property
     def rect(self):
@@ -132,14 +92,6 @@ class SpriteBotaoSalvar(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class SpriteQuadroPontuacao(Animacao):
 
@@ -147,7 +99,7 @@ class SpriteQuadroPontuacao(Animacao):
         super().__init__(['versao_final/sprites/quadropontuacao/'])
         self.__rect = self.image.get_rect(center=(0, 0))
         self.inicio_posicao = True  
-        self.__dimensoes = (192, 288)  
+        self.dimensoes = (192, 288)  
 
     @property
     def rect(self):
@@ -156,11 +108,19 @@ class SpriteQuadroPontuacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
+    
+class SpriteTeclaUp(Animacao):
+
+    def __init__(self) -> None:
+        super().__init__(['versao_final/sprites/botoes/cima/'])
+        self.__rect = self.image.get_rect(center=(0, 0))
+        self.inicio_posicao = True  
+        self.dimensoes = (52, 56)  
 
     @property
-    def dimensoes(self):
-        return self.__dimensoes
+    def rect(self):
+        return self.__rect
 
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
+    @rect.setter
+    def rect(self, rect):
+        self.__rect = rect

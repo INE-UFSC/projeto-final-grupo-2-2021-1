@@ -129,7 +129,8 @@ class Controlador:
 
     def atualiza_pontuacao(self):
         for cano in self.__lista_objetos:
-            if cano.x == self.const.posicao_pontuar and isinstance(cano, Cano):
+            if cano.x == self.const.posicao_pontuar and isinstance(cano, Cano) \
+                and not self.personagem.game_over:
                 self.__pontuacao.marca_ponto(1)
 
         self.__cenario.escreve_pontuacao(self.__pontuacao.mostra_ponto())

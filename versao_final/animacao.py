@@ -11,6 +11,7 @@ class Animacao(pygame.sprite.Sprite, ABC):
         self.sprite_atual = 0
         self.__velocidade_sprite = 0.05
         self.__sprites = []
+        self.__dimensoes = None
         self.diretorio = diretorio
         self.__busca_arquivo()
         self.image = self.__sprites[self.sprite_atual]
@@ -26,6 +27,14 @@ class Animacao(pygame.sprite.Sprite, ABC):
     @property
     def sprites(self):
         return self.__sprites
+
+    @property
+    def dimensoes(self):
+        return self.__dimensoes
+
+    @dimensoes.setter
+    def dimensoes(self, dimensoes):
+        self.__dimensoes = dimensoes
 
     def __busca_arquivo(self):
         for arquivo in self.diretorio:
@@ -49,7 +58,7 @@ class Animacao(pygame.sprite.Sprite, ABC):
 class PersonagemAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/personagem/'])
-        self.__dimensoes = self.const.dimensoes_personagem
+        self.dimensoes = self.const.dimensoes_personagem
         self.__rect = self.image.get_rect(center= \
             (self.const.posicao_personagem_x, self.const.posicao_personagem_y))
 
@@ -60,20 +69,12 @@ class PersonagemAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-    
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class CanoSuperiorAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/cano/canosuperior/'])
         self.__rect = self.image.get_rect(center=(self.const.posicao_gera_cano, 0))
-        self.__dimensoes = (48,631)
+        self.dimensoes = (48,631)
 
     @property
     def rect(self):
@@ -82,20 +83,12 @@ class CanoSuperiorAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class CanoInferiorAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/cano/canoinferior/'])
         self.__rect = self.image.get_rect(center=(self.const.posicao_gera_cano, 0))
-        self.__dimensoes = (48,631)
+        self.dimensoes = (48,631)
 
     @property
     def rect(self):
@@ -104,21 +97,13 @@ class CanoInferiorAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class ItemInvencivelAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/item/iteminvencibilidade/'])
         self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
         self.velocidade_sprite = 0.13
-        self.__dimensoes = (65, 65)
+        self.dimensoes = (65, 65)
 
     @property
     def rect(self):
@@ -127,21 +112,13 @@ class ItemInvencivelAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class ItemPequenoAnimacao(Animacao):
     def __init__(self) -> None:
         super().__init__(['versao_final/sprites/item/itempequeno/'])
         self.__rect = self.image.get_rect(center=(self.const.tela_jogo_largura, 0))
         self.velocidade_sprite = 0.13
-        self.__dimensoes = (65, 65)
+        self.dimensoes = (65, 65)
 
     @property
     def rect(self):
@@ -150,14 +127,6 @@ class ItemPequenoAnimacao(Animacao):
     @rect.setter
     def rect(self, rect):
         self.__rect = rect
-
-    @property
-    def dimensoes(self):
-        return self.__dimensoes
-
-    @dimensoes.setter
-    def dimensoes(self, dimensoes):
-        self.__dimensoes = dimensoes
 
 class ChaoAnimacao(Animacao):
     def __init__(self) -> None:
