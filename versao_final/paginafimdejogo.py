@@ -14,6 +14,14 @@ class PaginaFimDeJogo(Pagina):
         self.mensagem_interface = ''
         self.__texto_ativo = False
         self.nome_usuario = ''
+    
+    @property
+    def pontuacao_personagem(self):
+        return self.__pontuacao_personagem
+    
+    @pontuacao_personagem.setter
+    def pontuacao_personagem(self, pontuacao_personagem):
+        self.__pontuacao_personagem = pontuacao_personagem
 
     def __instancia_botoes(self):
         self.botoes.append(BotaoVoltar())
@@ -37,7 +45,7 @@ class PaginaFimDeJogo(Pagina):
                     self.__texto_ativo = botao.efeito_colisao()
                 elif isinstance(botao, BotaoSalvar):
                     self.__texto_ativo = True
-                    self.mensagem_interface = botao.efeito_colisao(self.__pontuacao_personagem.pontos, self.nome_usuario)
+                    self.mensagem_interface = botao.efeito_colisao(self.__pontuacao_personagem, self.nome_usuario)
                     if botao.salvo:
                         self.estado = self.mensagem_interface
                         self.rodando = False
@@ -73,7 +81,7 @@ class PaginaFimDeJogo(Pagina):
     def inserir_pontuacao(self):
 
         fonte = pygame.font.SysFont('Comic Sans MS', 50)
-        texto_fonte = fonte.render(str(self.__pontuacao_personagem.pontos).upper(), True, (70, 60, 255))
+        texto_fonte = fonte.render(str(self.__pontuacao_personagem).upper(), True, (70, 60, 255))
         self.cenario.tela.blit(texto_fonte,((self.const.tela_jogo_largura/2)-20,150))
 
     def inserir_mensagem(self):
