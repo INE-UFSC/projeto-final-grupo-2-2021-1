@@ -74,19 +74,19 @@ class PaginaFimDeJogo(Pagina):
 
     def inserir_nome(self):
 
-        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        fonte = pygame.font.SysFont('Arial', 20)
         texto_fonte = fonte.render(str(self.nome_usuario).upper(), True, (255, 255, 255))
         self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/2)-20,240))
 
     def inserir_pontuacao(self):
 
-        fonte = pygame.font.SysFont('Comic Sans MS', 50)
+        fonte = pygame.font.SysFont('Arial', 40)
         texto_fonte = fonte.render(str(self.__pontuacao_personagem).upper(), True, (70, 60, 255))
         self.cenario.tela.blit(texto_fonte,((self.const.tela_jogo_largura/2)-20,150))
 
     def inserir_mensagem(self):
 
-        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        fonte = pygame.font.SysFont('Arial', 20)
         texto_fonte = fonte.render(str(self.mensagem_interface).upper(), True, (70, 60, 255))
         self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/6),400))
 

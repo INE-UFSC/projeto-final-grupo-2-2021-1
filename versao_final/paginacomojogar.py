@@ -34,14 +34,14 @@ class PaginaComoJogar(Pagina):
             y += 80
 
     def desenha_lista_texto(self):
-        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        fonte = pygame.font.SysFont('Arial', 20)
         y = 100
         for texto in self.__texto_base:
             texto_fonte = fonte.render(texto, True, (0, 100, 0))
             self.cenario.tela.blit(texto_fonte,(80, y))
             y += 40
         
-        fonte = pygame.font.SysFont('Comic Sans MS', 25)
+        fonte = pygame.font.SysFont('Arial', 20)
         y=260
         for texto in self.__texto_objetos:
             

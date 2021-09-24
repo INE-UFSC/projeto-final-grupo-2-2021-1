@@ -21,9 +21,9 @@ class PaginaPontuacao(Pagina):
             y += 100
 
     def desenha_rank(self):
-        self.__fundo_tabela.update(self.const.tela_jogo_largura/2, self.const.tela_jogo_altura/2)
+        self.__fundo_tabela.update(self.const.tela_jogo_largura/2+20, self.const.tela_jogo_altura/2)
         self.__fundo_tabela.draw(self.cenario.tela)
-        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        fonte = pygame.font.SysFont('Arial', 20)
         indice = 1
         y = 200
 

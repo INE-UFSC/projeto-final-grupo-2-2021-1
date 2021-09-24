@@ -23,6 +23,14 @@ class Pagina(ABC):
     def botoes(self, botao):
         self.__botoes = botao
 
+    @property
+    def rodando(self):
+        return self.__rodando
+    
+    @rodando.setter
+    def rodando(self, rodando):
+        self.__rodando = rodando
+
     def desenha_texto(self, texto, tamanho):
         fonte = pygame.font.Font(self.__fonte, tamanho)
         superficie = fonte.render(texto, True, (0,128,128))
@@ -37,7 +45,7 @@ class Pagina(ABC):
                 pygame.quit()
                 sys.exit
             if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
+                if event.key == K_ESCAPE:                    
                     pygame.quit()
                     sys.exit
             if event.type == pygame.MOUSEBUTTONDOWN:

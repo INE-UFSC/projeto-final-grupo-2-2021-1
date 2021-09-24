@@ -24,7 +24,7 @@ class PaginaMenu(Pagina):
         self.rodando = True
         self.toca_som()
         while self.rodando:
-
+            
             self.cenario.inicializa_tela()
             self.desenha_texto("Menu Principal",40)
 
@@ -35,3 +35,4 @@ class PaginaMenu(Pagina):
             self.atualiza_tela()
             self.eventos_menu()
             
+
