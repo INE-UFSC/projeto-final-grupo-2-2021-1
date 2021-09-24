@@ -1,5 +1,5 @@
-from controladorpagina import ContraladorPagina
+from controladorpagina import ControladorPagina
 
 
-control = ContraladorPagina()
-control.menu_principal()
+control = ControladorPagina()
+control.iniciar()

@@ -46,7 +46,7 @@ class Controlador:
     def fim_de_jogo(self):
         return self.__fim_de_jogo
 
-    def iniciar(self):
+    def menu(self):
 
         pygame.init()
         clock = pygame.time.Clock()
