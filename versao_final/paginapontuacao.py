@@ -1,7 +1,7 @@
 from pagina import Pagina
 from pygame.constants import K_ESCAPE, K_KP_ENTER, K_SPACE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from botaogenerico import BotaoVoltar
-from spritebotoes import SpriteQuadroPontuacao
+from spritesestaticos import SpriteQuadroPontuacao
 from atualizaplacar import Placar
 import pygame, sys
 

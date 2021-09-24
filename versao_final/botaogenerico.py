@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pontuacaoDAO import PontuacaoDAO
-from spritebotoes import SpriteBotaoJogar, SpriteBotaoComoJogar, \
+from spritesestaticos import SpriteBotaoJogar, SpriteBotaoComoJogar, \
         SpriteBotaoPontuacao, SpriteBotaoSalvar, SpriteBotaoVoltar, SpriteCaixaTexto
 import pygame
 
