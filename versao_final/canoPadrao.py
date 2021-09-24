@@ -19,6 +19,8 @@ class CanoPadrao(Cano):
         if not personagem.invencivel:
             personagem.game_over = True
             self.colidiu = True
+            self.colisao_som.set_volume(0.2)
+            self.colisao_som.play()
 
     def move(self):
         self.x += -5

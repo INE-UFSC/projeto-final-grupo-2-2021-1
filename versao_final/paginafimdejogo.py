@@ -88,11 +88,14 @@ class PaginaFimDeJogo(Pagina):
 
         fonte = pygame.font.SysFont('Comic Sans MS', 30)
         texto_fonte = fonte.render(str(self.mensagem_interface).upper(), True, (70, 60, 255))
-        self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/5)-20,400))
+        self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/6),400))
 
     def menu(self):
         
         pygame.init()
+
+        self.toca_som()
+
         self.rodando = True
         while self.rodando:
             self.cenario.inicializa_tela()
@@ -105,5 +108,6 @@ class PaginaFimDeJogo(Pagina):
             self.detecta_colisao()
 
             self.resetaclick()
-            self.eventos_menu()
             self.atualiza_tela()
+            self.eventos_menu()
+            

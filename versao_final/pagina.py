@@ -24,7 +24,7 @@ class Pagina(ABC):
 
     def desenha_texto(self, texto, tamanho):
         fonte = pygame.font.Font(self.__fonte, tamanho)
-        superficie = fonte.render(texto, True, (25,25,200))
+        superficie = fonte.render(texto, True, (0,128,128))
         texto_rect = superficie.get_rect()
         texto_rect.center = (self.const.tela_jogo_largura/2, int(self.const.tela_jogo_altura/10))
         self.cenario.tela.blit(superficie, texto_rect)
@@ -65,6 +65,12 @@ class Pagina(ABC):
             if botao.gera_retangulo().collidepoint(pygame.mouse.get_pos()) and self.click:
                 self.estado = botao.efeito_colisao()
                 self.rodando = False
+
+    def toca_som(self):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load('versao_final/sons/menu/som_menu.wav')
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.03)
 
     @abstractmethod
     def desenha_botao(self):

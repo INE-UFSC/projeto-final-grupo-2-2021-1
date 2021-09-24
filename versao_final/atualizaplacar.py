@@ -24,7 +24,7 @@ class Placar:
 
     def __retirar_pontuacao_menor(self):
         for pontos in self.__rank_pontuacao: 
-            if len(self.__rank_pontuacao) > 5:
+            if len(self.__rank_pontuacao) > 8:
                 nome = self.__rank_pontuacao.pop(0)[0]
                 self.__pontuacaoDAO.remove(nome)
             else:

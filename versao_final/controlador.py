@@ -51,6 +51,8 @@ class Controlador:
         pygame.init()
         clock = pygame.time.Clock()
 
+        self.tocar_musica_jogo()
+
         self.rodando = True
         while self.rodando:
 
@@ -66,6 +68,12 @@ class Controlador:
             self.le_eventos()
             self.confere_fim_de_jogo()
             pygame.display.update()
+
+    def tocar_musica_jogo(self):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load('versao_final/sons/menu/som_jogo.ogg')
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.4)
 
     def atualiza_personagem(self):
         self.__personagem.desenha_personagem(self.__cenario.tela)

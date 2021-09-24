@@ -22,6 +22,7 @@ class PaginaMenu(Pagina):
 
         pygame.init()
         self.rodando = True
+        self.toca_som()
         while self.rodando:
 
             self.cenario.inicializa_tela()
@@ -31,5 +32,6 @@ class PaginaMenu(Pagina):
             self.detecta_colisao()
 
             self.resetaclick()
-            self.eventos_menu()
             self.atualiza_tela()
+            self.eventos_menu()
+            

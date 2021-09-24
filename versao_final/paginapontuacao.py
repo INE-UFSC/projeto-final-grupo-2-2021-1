@@ -47,6 +47,7 @@ class PaginaPontuacao(Pagina):
             self.detecta_colisao()
             
             self.resetaclick()
-            self.eventos_menu()
             self.atualiza_tela()
+            self.eventos_menu()
+            
 

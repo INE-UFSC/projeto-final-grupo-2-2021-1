@@ -10,7 +10,8 @@ class PaginaComoJogar(Pagina):
         super().__init__()
         self.botoes.append(BotaoVoltar())
         self.estado = "ComoJogar"
-        self.__lista_textos = []
+        self.__texto_base = []
+        self.__texto_objetos = []
         self.__texto_como_jogar()
         self.__sprites_jogo = []
         self.__sprites_jogo.append(pygame.sprite.Group(PersonagemAnimacao()))
@@ -33,21 +34,31 @@ class PaginaComoJogar(Pagina):
             y += 80
 
     def desenha_lista_texto(self):
+        fonte = pygame.font.SysFont('Comic Sans MS', 30)
         y = 100
-        for texto in self.__lista_textos:
-            fonte = pygame.font.SysFont('Comic Sans MS', 25)
-            texto_fonte = fonte.render(texto, True, (0, 240, 0))
+        for texto in self.__texto_base:
+            texto_fonte = fonte.render(texto, True, (0, 100, 0))
+            self.cenario.tela.blit(texto_fonte,(80, y))
+            y += 40
+        
+        fonte = pygame.font.SysFont('Comic Sans MS', 25)
+        y=260
+        for texto in self.__texto_objetos:
+            
+            texto_fonte = fonte.render(texto, True, (0, 100, 0))
             self.cenario.tela.blit(texto_fonte,(160, y))
             y += 80
 
     def __texto_como_jogar(self):
-        texto_1 = "Neste jogo seu objetivo é fazer o maior número de pontos possíveis"
-        texto_2 = "Desviando dos canos e pegando os itens pelo cenario"
+        texto_1 = "Neste jogo seu objetivo é fazer o maior número de pontos possíveis."
+        texto_2 = "Desviando dos canos e pegando os itens pelo cenario."
         texto_3 = "Esse é seu personagem!"
-        texto_4 = "Você controle ele pela tecla Key_Up"
-        texto_5 = "Esse é o item que diminui o tamanho do seu personagem"
-        texto_6 = "Esse é o item que deixa seu personagem invencível"
-        self.__lista_textos = [texto_1, texto_2, texto_3, texto_4, texto_5, texto_6]
+        texto_4 = "Você controle ele pela tecla Key_Up."
+        texto_5 = "Esse é o item que diminui o tamanho do seu personagem."
+        texto_6 = "Esse é o item que deixa seu personagem invencível."
+
+        self.__texto_base = [texto_1, texto_2]
+        self.__texto_objetos = [texto_3, texto_4, texto_5, texto_6]
 
     def menu(self):
         
@@ -63,5 +74,6 @@ class PaginaComoJogar(Pagina):
             self.detecta_colisao()
             
             self.resetaclick()
-            self.eventos_menu()
             self.atualiza_tela()
+            self.eventos_menu()
+            

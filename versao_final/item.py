@@ -1,6 +1,7 @@
 import random
 from constantes import Constante
 from abc import ABC, abstractmethod
+import pygame
 
 
 class Item(ABC):
@@ -12,6 +13,7 @@ class Item(ABC):
         self.__colidiu = False
         self.__ativo = False
         self.__final_efeito = 0
+        self.__colisao_som = pygame.mixer.Sound("versao_final/sons/efeitos/item_colisao.wav")
     
     @property
     def const(self):
@@ -69,6 +71,14 @@ class Item(ABC):
     def final_efeito(self, final_efeito):
         self.__final_efeito = final_efeito
 
+    @property
+    def colisao_som(self):
+        return self.__colisao_som
+
+    @colisao_som.setter
+    def colisao_som(self, colisao_som):
+        self.__colisao_som = colisao_som
+
     def atualiza(self, tela_jogo): #Faz todo o processo de gerar o item, aplicar o movimento e destruir
         if not self.__criado:
             self.define_posicao_tela()
@@ -100,6 +110,8 @@ class Item(ABC):
         self.__x += -5
     
     def efeito_colisao(self, personagem):
+        self.colisao_som.set_volume(0.3)
+        self.colisao_som.play()
         self.efeito(personagem)
 
     def tempo(self, tempo_atual):
