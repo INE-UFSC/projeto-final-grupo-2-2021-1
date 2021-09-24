@@ -11,6 +11,7 @@ class Pagina(ABC):
         self.cenario = CenarioMenu()
         self.__fonte = pygame.font.get_default_font()
         self.__botoes = []
+        self.__rodando = True
         self.click = False
         self.estado = ""
 

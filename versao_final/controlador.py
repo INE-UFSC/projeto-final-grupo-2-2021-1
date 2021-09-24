@@ -71,7 +71,7 @@ class Controlador:
 
     def tocar_musica_jogo(self):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load('versao_final/sons/menu/som_jogo.ogg')
+        pygame.mixer.music.load('versao_final/sons/menu/som_jogo.wav')
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.4)
 

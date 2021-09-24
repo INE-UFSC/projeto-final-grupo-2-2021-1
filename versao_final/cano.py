@@ -19,7 +19,7 @@ class Cano(ABC):
         self.__base_inferior = 0
         self.__tamanho_cano_definido = False
         self.__colidiu = False
-        self.__colisao_som = pygame.mixer.Sound("versao_final/sons/efeitos/cano_colisao.ogg")
+        self.__colisao_som = pygame.mixer.Sound("versao_final/sons/efeitos/cano_colisao.wav")
 
     @property
     def const(self):
