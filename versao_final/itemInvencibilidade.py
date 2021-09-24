@@ -33,10 +33,12 @@ class ItemInvencibilidade(Item):
         self.__personagem.invencivel = True
         self.colidiu = True
         self.ativo = True
+        personagem.animacao = personagem.animacao_item_efeito
 
     def reverter(self):
         self.__personagem.invencivel = False
         self.ativo = False
+        self.__personagem.animacao = self.__personagem.animacao_personagem
 
     def tempo_item(self):
         return self.tempo_efeito

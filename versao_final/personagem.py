@@ -4,12 +4,15 @@
 import pygame
 from constantes import Constante
 from abc import ABC, abstractmethod
-from animacao import PersonagemAnimacao
+from animacao import PersonagemAnimacao, EfeitoItemInvencibilidade
+
 
 class Personagem(ABC):
     def __init__(self):
         self.__const = Constante()
-        self.__animacao = pygame.sprite.Group(PersonagemAnimacao())
+        self.__animacao_personagem = pygame.sprite.Group(PersonagemAnimacao())
+        self.__animacao_item_efeito = pygame.sprite.Group(EfeitoItemInvencibilidade())
+        self.__animacao = self.__animacao_personagem
         self.__x = self.__const.posicao_personagem_x
         self.__y = self.__const.posicao_personagem_y
         self.__tecla_pressionada = False
@@ -34,6 +37,14 @@ class Personagem(ABC):
     def const(self):
         return self.__const
     
+    @property
+    def animacao_personagem(self):
+        return self.__animacao_personagem
+    
+    @property
+    def animacao_item_efeito(self):
+        return self.__animacao_item_efeito
+    
     @x.setter
     def x(self, x):
         self.__x = x
@@ -53,6 +64,14 @@ class Personagem(ABC):
     @const.setter
     def const(self, const):
         self.__const = const
+    
+    @animacao_personagem.setter
+    def animacao_personagem(self, animacao_personagem):
+        self.__animacao_personagem = animacao_personagem
+    
+    @animacao_item_efeito.setter
+    def animacao_item_efeito(self, animacao_item_efeito):
+        self.__animacao_item_efeito = animacao_item_efeito
 
     def gera_retangulo(self):  # gera o retângulo referente à posição do personagem
         retangulo = self.__animacao.sprites()[0].rect

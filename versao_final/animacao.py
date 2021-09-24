@@ -151,3 +151,18 @@ class ChaoAnimacao(Animacao):
         if self.posicao_chao <= 347:
             self.posicao_chao = 438.5
         self.posicao_chao -= self.velocidade_chao
+
+class EfeitoItemInvencibilidade(Animacao):
+    def __init__(self) -> None:
+        super().__init__(['versao_final/sprites/personagem_item_invencibilidade/'])
+        self.dimensoes = self.const.dimensoes_personagem
+        self.__rect = self.image.get_rect(center= \
+            (self.const.posicao_personagem_x, self.const.posicao_personagem_y))
+
+    @property
+    def rect(self):
+        return self.__rect
+
+    @rect.setter
+    def rect(self, rect):
+        self.__rect = rect
