@@ -60,12 +60,28 @@ class BotaoSalvar(BotaoGenerico):
         sprite = pygame.sprite.Group(SpriteBotaoSalvar())
         super().__init__(sprite)
         self.__pontuacao_dao = PontuacaoDAO() 
+        self.__salvo = False
+
+    @property
+    def salvo(self):
+        return self.__salvo
 
     def efeito_colisao(self, pontuacao, nome):
-        self.__pontuacao_dao.add(nome, pontuacao)
+        nome = str(nome).upper()
 
-        return "MenuPrincipal"
+        try:
+            self.__pontuacao_dao.get(nome)
+            return "Esse User ja existe!"
 
+        except:
+            if len(nome) < 3:
+                return "O User deve conter 3 caracteres!"
+            else:
+                self.__pontuacao_dao.add(nome, pontuacao)
+                self.__salvo = True
+                return "MenuPrincipal"
+
+        
 class CaixaTexto(BotaoGenerico):
     def __init__(self) -> None:
         sprite = pygame.sprite.Group(SpriteCaixaTexto())

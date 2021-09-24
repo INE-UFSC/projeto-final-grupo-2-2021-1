@@ -35,4 +35,4 @@ class DAO(ABC):
             raise KeyError
 
     def get_all(self):
-        return self.__cache.values()
+        return self.__cache.keys()

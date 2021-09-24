@@ -10,7 +10,8 @@ class PaginaFimDeJogo(Pagina):
         self.__pontuacao_personagem = pontuacao
         self.__caixa_texto = CaixaTexto()
         self.__instancia_botoes()
-        self.estado = ''
+        self.estado = 'FimDeJogo'
+        self.mensagem_interface = ''
         self.__texto_ativo = False
         self.nome_usuario = ''
 
@@ -28,15 +29,6 @@ class PaginaFimDeJogo(Pagina):
                 botao.atualizar(self.const.tela_jogo_largura/2, y)
                 botao.desenhar(self.cenario.tela)
                 y += 70
-    
-    def gera_fonte(self, texto, tamanho_fonte):
-        fonte = pygame.font.SysFont('Comic Sans MS', tamanho_fonte)
-        texto_fonte = fonte.render(str(texto).upper(), True, (255, 255, 255))
-
-        return texto_fonte
-
-    def mostra_pontos(self):
-        pass
 
     def detecta_colisao(self):
         for botao in self.botoes:
@@ -44,7 +36,11 @@ class PaginaFimDeJogo(Pagina):
                 if isinstance(botao, CaixaTexto):
                     self.__texto_ativo = botao.efeito_colisao()
                 elif isinstance(botao, BotaoSalvar):
-                    self.estado = botao.efeito_colisao(self.__pontuacao_personagem.pontos, self.nome_usuario)
+                    self.__texto_ativo = True
+                    self.mensagem_interface = botao.efeito_colisao(self.__pontuacao_personagem.pontos, self.nome_usuario)
+                    if botao.salvo:
+                        self.estado = self.mensagem_interface
+                        self.rodando = False
                 else:
                     self.estado = botao.efeito_colisao()
                     self.rodando = False
@@ -70,13 +66,21 @@ class PaginaFimDeJogo(Pagina):
 
     def inserir_nome(self):
 
-        self.cenario.tela.blit(self.gera_fonte(self.nome_usuario, 30), \
-            ((self.const.tela_jogo_largura/2)-20,240))
+        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        texto_fonte = fonte.render(str(self.nome_usuario).upper(), True, (255, 255, 255))
+        self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/2)-20,240))
 
     def inserir_pontuacao(self):
 
-        self.cenario.tela.blit(self.gera_fonte(self.__pontuacao_personagem.pontos, 50), \
-            ((self.const.tela_jogo_largura/2)-20,150))
+        fonte = pygame.font.SysFont('Comic Sans MS', 50)
+        texto_fonte = fonte.render(str(self.__pontuacao_personagem.pontos).upper(), True, (70, 60, 255))
+        self.cenario.tela.blit(texto_fonte,((self.const.tela_jogo_largura/2)-20,150))
+
+    def inserir_mensagem(self):
+
+        fonte = pygame.font.SysFont('Comic Sans MS', 30)
+        texto_fonte = fonte.render(str(self.mensagem_interface).upper(), True, (70, 60, 255))
+        self.cenario.tela.blit(texto_fonte, ((self.const.tela_jogo_largura/5)-20,400))
 
     def menu(self):
         
@@ -85,11 +89,12 @@ class PaginaFimDeJogo(Pagina):
         while self.rodando:
             self.cenario.inicializa_tela()
             self.desenha_texto("Fim de Jogo", 40)
-
             self.desenha_botao(250)
-            self.detecta_colisao()
             self.inserir_nome()
             self.inserir_pontuacao()
+            self.inserir_mensagem()
+
+            self.detecta_colisao()
 
             self.resetaclick()
             self.eventos_menu()
