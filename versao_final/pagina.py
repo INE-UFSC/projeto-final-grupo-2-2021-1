@@ -42,12 +42,12 @@ class Pagina(ABC):
     def eventos_menu(self):
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.quit()
-                sys.exit
+                self.estado = "PaginaFechar"
+                self.rodando = False
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:                    
-                    pygame.quit()
-                    sys.exit
+                    self.estado = "PaginaFechar"
+                    self.rodando = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     self.click = True

@@ -2,6 +2,7 @@ from paginamenu import PaginaMenu
 from paginapontuacao import PaginaPontuacao
 from paginacomojogar import PaginaComoJogar
 from paginafimdejogo import PaginaFimDeJogo
+from paginafechar import PaginaSair
 from controlador import Controlador
 
 
@@ -18,7 +19,8 @@ class ControladorPagina:
                     'Jogo'          : Controlador(),
                     'Pontuacao'     : PaginaPontuacao(),
                     'ComoJogar'     : PaginaComoJogar(),
-                    'FimDeJogo'     : PaginaFimDeJogo(self.__pontuacao_jogo)
+                    'FimDeJogo'     : PaginaFimDeJogo(self.__pontuacao_jogo),
+                    'PaginaFechar'  : PaginaSair()
                     }
                 
                 self.paginas[self.__pagina_atual].menu()

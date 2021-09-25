@@ -56,12 +56,12 @@ class PaginaFimDeJogo(Pagina):
     def eventos_menu(self):
         for event in pygame.event.get():
             if event.type == QUIT:
-                pygame.quit()
-                sys.exit
+                self.estado = "PaginaFechar"
+                self.rodando = False
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit
+                    self.estado = "PaginaFechar"
+                    self.rodando = False
                 if event.type == pygame.KEYDOWN and self.__texto_ativo:
                     if event.key == pygame.K_BACKSPACE:
                         self.nome_usuario = self.nome_usuario[0:-1]
